@@ -7,6 +7,7 @@ public class Main {
         
         Tarefa task = new Tarefa();
         
+        task.setId(10);
         task.setNome("Rotinha Matinal");
         task.setDescricao("Tomar Café\nIr para Academia\nLanchar\nAlmoçar");
         

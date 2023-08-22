@@ -1,6 +1,5 @@
 package Model;
 
-import Model.Tarefa;
 import java.util.*;
 
 public class TarefaDAO {
@@ -44,7 +43,6 @@ public class TarefaDAO {
             if (tarefa.getNome().equalsIgnoreCase(nomeTarefa)) {
                 return i;
             }
-
         }
         return -1;
     }
@@ -53,10 +51,9 @@ public class TarefaDAO {
         for (int i = 0; i < listaTarefas.size(); i++) {
             Tarefa tarefa = listaTarefas.get(i);
 
-            if (tarefa.getID() == idTarefa) {
+            if (tarefa.getId() == idTarefa) {
                 return i;
             }
-
         }
         return -1;
     }
