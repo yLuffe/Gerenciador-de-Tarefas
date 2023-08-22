@@ -1,8 +1,16 @@
 package Main;
+import Model.*;
 
 public class Main {
 
     public static void main(String[] args) {
+        
+        Tarefa task = new Tarefa();
+        
+        task.setNome("Rotinha Matinal");
+        task.setDescricao("Tomar Café\nIr para Academia\nLanchar\nAlmoçar");
+        
+        System.out.println(task);
 
     }
 
