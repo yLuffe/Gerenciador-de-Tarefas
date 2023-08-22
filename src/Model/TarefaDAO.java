@@ -17,7 +17,7 @@ public class TarefaDAO {
     public ArrayList<Tarefa> getListaTarefas() {
         return listaTarefas;
     }
-    
+
     // Atualizar (Update)
     public void updateTarefa(String oldName, String newName, String descricao) {
         int index = searchIndex(oldName);
@@ -49,4 +49,15 @@ public class TarefaDAO {
         return -1;
     }
 
+    public int searchIndex(int idTarefa) {
+        for (int i = 0; i < listaTarefas.size(); i++) {
+            Tarefa tarefa = listaTarefas.get(i);
+
+            if (tarefa.getID() == idTarefa) {
+                return i;
+            }
+
+        }
+        return -1;
+    }
 }
