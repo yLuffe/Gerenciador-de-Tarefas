@@ -1,30 +1,29 @@
 package Model;
 
-import Model.Tarefa;
 import java.sql.*;
 import Database.ConexaoSQLite;
 
 public class TarefaDAO {
-    
+
     private final ConexaoSQLite conexaoSQLite;
-    
-    public TarefaDAO(){
+
+    public TarefaDAO() {
         conexaoSQLite = new ConexaoSQLite();
         conexaoSQLite.conectar();
     }
-    
+
     // Create
     public void addTask(Tarefa task) {
         String sql = "INSERT INTO tb_tarefas (nome_task, desc_task) VALUES (?, ?)";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setString(1, task.getNome());
-            stmt.setString(1, task.getDescricao());
+            stmt.setString(2, task.getDescricao());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     // Read
     public Tarefa getTaskById(int id) {
         String sql = "SELECT * FROM tb_tarefas WHERE id = ?";
@@ -42,7 +41,7 @@ public class TarefaDAO {
         }
         return null;
     }
-    
+
     // Update
     public void updateTask(Tarefa task) {
         String sql = "UPDATE tb_tarefas SET nome_task = ?, desc_task = ? WHERE id = ? ";
@@ -56,7 +55,7 @@ public class TarefaDAO {
             e.printStackTrace();
         }
     }
-    
+
     // Delete
     public void deleteTarefa(int id) {
         String sql = "DELETE FROM tb_tarefas WHERE id = ?";

@@ -1,22 +1,34 @@
 package Main;
+
 import Database.ConexaoSQLite;
-import Model.*;
+import View.TelaInicial;
+import com.formdev.flatlaf.*;
 
 public class Main {
 
     public static void main(String[] args) {
+
         
-        ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
-        conexaoSQLite.conectar();
-        conexaoSQLite.desconectar();
+        FlatDarculaLaf.setup();
         
-        Tarefa task = new Tarefa();
-        
-        task.setId(10);
-        task.setNome("Rotinha Matinal");
-        task.setDescricao("Tomar Café\nIr para Academia\nLanchar\nAlmoçar");
-        
-        System.out.println(task);
+        TelaInicial newTela = new TelaInicial();
+        newTela.setVisible(true);
+
+        // Chamando banco de dados e conectando
+        ConexaoSQLite connect = new ConexaoSQLite();
+        connect.conectar();
+
+//        // Criando uma nova tarefa
+//        Tarefa task = new Tarefa();
+//        task.setNome("Rotina Matinal");
+//        task.setDescricao("Academia e Café");
+//                
+//        // Adicionando no bando de dados
+//        TarefaDAO newTask = new TarefaDAO();
+//        newTask.addTask(task);
+//        System.out.println(task);
+        // Desconectando do Banco de Dados
+        connect.desconectar();
 
     }
 
