@@ -1,7 +1,11 @@
 Gerenciador de Tarefas 📋
-Bem-vindo ao Gerenciador de Tarefas! Este é um projeto desenvolvido em Java com uma interface gráfica moderna usando Java Swing e um banco de dados SQLite para manter suas tarefas organizadas. O tema visual FlatLafDracula dá um toque elegante ao aplicativo. ✨
+
+Bem-vindo ao Gerenciador de Tarefas! 
+Este é um projeto desenvolvido em Java com uma interface gráfica moderna usando Java Swing e um banco de dados SQLite para manter suas tarefas organizadas. 
+O tema visual FlatLafDracula dá um toque elegante ao aplicativo. ✨
 
 Funcionalidades ✔️
+
 Nosso Gerenciador de Tarefas oferece:
 
 Adicionar novas tarefas com nome e descrição.
