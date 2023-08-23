@@ -60,6 +60,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(100, 150, 100));
         jButton2.setText("Nova Tarefa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(200, 220, 240));
         jButton3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -164,6 +169,11 @@ public class TelaInicial extends javax.swing.JFrame {
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        TelaTarefa newTela = new TelaTarefa();
+        newTela.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
 
