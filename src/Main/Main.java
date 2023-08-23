@@ -1,22 +1,29 @@
 package Main;
+
+import Model.Tarefa;
+import Model.TarefaDAO;
 import Database.ConexaoSQLite;
-import Model.*;
 
 public class Main {
 
     public static void main(String[] args) {
         
-        ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
-        conexaoSQLite.conectar();
-        conexaoSQLite.desconectar();
+        // Chamando banco de dados e conectando
+        ConexaoSQLite connect = new ConexaoSQLite();
+        connect.conectar();
         
+        // Criando uma nova tarefa
         Tarefa task = new Tarefa();
-        
-        task.setId(10);
-        task.setNome("Rotinha Matinal");
-        task.setDescricao("Tomar Café\nIr para Academia\nLanchar\nAlmoçar");
-        
+        task.setNome("Rotina Matinal");
+        task.setDescricao("Academia e Café");
+                
+        // Adicionando no bando de dados
+        TarefaDAO newTask = new TarefaDAO();
+        newTask.addTask(task);
         System.out.println(task);
+        
+        // Desconectando do Banco de Dados
+        connect.desconectar();
 
     }
 
