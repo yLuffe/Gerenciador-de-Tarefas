@@ -16,6 +16,12 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
+    public Tarefa(int id, String nome, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+    
     // Getters and Setters
     public int getId() {
         return id;
