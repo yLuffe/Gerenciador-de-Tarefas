@@ -3,7 +3,7 @@ package Model;
 public class Tarefa {
 
     // Definindo Tarefa
-    private int UUID;
+    private int id;
     private String nome;
     private String descricao;
 
@@ -17,12 +17,12 @@ public class Tarefa {
     }
 
     // Getters and Setters
-    public int getUUID() {
-        return UUID;
+    public int getId() {
+        return id;
     }
 
-    public void setUUID(int UUID) {
-        this.UUID = UUID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -43,7 +43,7 @@ public class Tarefa {
 
     @Override
     public String toString() {
-        return "Tarefa: " + nome
+        return "Tarefa: " + nome + " ID: " + id
                 + "\n\nDescrição:\n" + descricao;
     }
 

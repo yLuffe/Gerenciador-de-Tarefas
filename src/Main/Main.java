@@ -1,12 +1,18 @@
 package Main;
+import Database.ConexaoSQLite;
 import Model.*;
 
 public class Main {
 
     public static void main(String[] args) {
         
+        ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
+        conexaoSQLite.conectar();
+        conexaoSQLite.desconectar();
+        
         Tarefa task = new Tarefa();
         
+        task.setId(10);
         task.setNome("Rotinha Matinal");
         task.setDescricao("Tomar Café\nIr para Academia\nLanchar\nAlmoçar");
         

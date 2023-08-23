@@ -1,6 +1,5 @@
 package Model;
 
-import Model.Tarefa;
 import java.util.*;
 
 public class TarefaDAO {
@@ -17,7 +16,7 @@ public class TarefaDAO {
     public ArrayList<Tarefa> getListaTarefas() {
         return listaTarefas;
     }
-    
+
     // Atualizar (Update)
     public void updateTarefa(String oldName, String newName, String descricao) {
         int index = searchIndex(oldName);
@@ -44,9 +43,18 @@ public class TarefaDAO {
             if (tarefa.getNome().equalsIgnoreCase(nomeTarefa)) {
                 return i;
             }
-
         }
         return -1;
     }
 
+    public int searchIndex(int idTarefa) {
+        for (int i = 0; i < listaTarefas.size(); i++) {
+            Tarefa tarefa = listaTarefas.get(i);
+
+            if (tarefa.getId() == idTarefa) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
