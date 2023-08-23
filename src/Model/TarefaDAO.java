@@ -25,8 +25,8 @@ public class TarefaDAO {
         }
     }
     
-    // Ler
-    public Terefa getTaskById(int id) {
+    // Read
+    public Tarefa getTaskById(int id) {
         String sql = "SELECT * FROM tb_tarefas WHERE id = ?";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setInt(1, id);
@@ -40,10 +40,33 @@ public class TarefaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
     
+    // Update
+    public void updateTask(Tarefa task) {
+        String sql = "UPDATE tb_tarefas SET nome_task = ?, desc_task = ? WHERE id = ? ";
+        try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
+            stmt.setString(1, task.getNome());
+            stmt.setString(2, task.getDescricao());
+            stmt.setInt(3, task.getId());
 
-
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // Delete
+    public void deleteTarefa(int id) {
+        String sql = "DELETE FROM tb_tarefas WHERE id = ?";
+        try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 //    // ArrayList simulando Banco de Dados
