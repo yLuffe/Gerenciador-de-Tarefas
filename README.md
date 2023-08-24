@@ -1,5 +1,11 @@
 # Gerenciador de Tarefas 📋
 
+<div align="center" style="display: flex; flex-wrap: nowrap">
+  <img src="https://cdn.iconscout.com/icon/free/png-256/java-60-1174953.png"  alt="Java logo"><img src="https://cdn.iconscout.com/icon/free/png-256/sqlite-9-1174939.png" alt="SQLite logo">
+</div>
+<br>
+<center>
+
 Bem-vindo ao Gerenciador de Tarefas! Este é um projeto desenvolvido em Java com uma interface gráfica moderna usando Java Swing e um banco de dados SQLite para manter suas tarefas organizadas. O tema visual FlatLafDracula dá um toque elegante ao aplicativo. ✨
 
 ## Funcionalidades ✔️
