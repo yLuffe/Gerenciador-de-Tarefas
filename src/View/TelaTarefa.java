@@ -1,15 +1,19 @@
 package View;
 
+import Database.ConexaoSQLite;
 import Model.Tarefa;
 import Model.TarefaDAO;
-import java.awt.HeadlessException;
+import View.util.LimitChars;
 import javax.swing.JOptionPane;
-import org.sqlite.SQLiteException;
 
 public class TelaTarefa extends javax.swing.JFrame {
 
     public TelaTarefa() {
         initComponents();
+
+        // Limitando Caracteres dos Campos
+        jTextNomeTask.setDocument(new LimitChars(48));
+        jTextDescTask.setDocument(new LimitChars(2048));
     }
 
     @SuppressWarnings("unchecked")
@@ -101,6 +105,7 @@ public class TelaTarefa extends javax.swing.JFrame {
         jTextDescTask.setLineWrap(true);
         jTextDescTask.setRows(5);
         jTextDescTask.setWrapStyleWord(true);
+        jTextDescTask.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane1.setViewportView(jTextDescTask);
 
         jLayeredPane3.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -194,11 +199,16 @@ public class TelaTarefa extends javax.swing.JFrame {
 
             if (insertDB == true) {
                 JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
             } else {
                 throw new Exception("Erro ao criar a tarefa, verifique os campos e tente novamente!");
             }
+        } catch (NullPointerException e) {
+            System.out.println("NPE - New Task");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        } finally {
+//            new ConexaoSQLite().desconectar();
         }
     }//GEN-LAST:event_jbuttonSaveTaskActionPerformed
 
@@ -207,7 +217,7 @@ public class TelaTarefa extends javax.swing.JFrame {
             String text = """
                           Deseja mesmo cancelar a tarefa e volta para tela inicial?
                           Todos os dados não salvos serão perdidos para sempre!""";
-            
+
             int option = JOptionPane.showConfirmDialog(null, text, "Confirmação", JOptionPane.YES_NO_OPTION);
 
             if (option == JOptionPane.YES_OPTION) {

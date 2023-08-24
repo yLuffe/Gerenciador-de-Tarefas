@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 public class Main {
 
     public static void main(String[] args) {
-
+        
         // Altera o nome dos botões de YES e NO do JOP para SIM e NÃO
         UIManager.put("OptionPane.yesButtonText", "Sim");
         UIManager.put("OptionPane.noButtonText", "Não");
@@ -22,15 +22,17 @@ public class Main {
         // Chamando banco de dados e conectando
         ConexaoSQLite connect = new ConexaoSQLite();
         connect.conectar();
+        
+        // Registrar o shutdown hook para desconectar a conexão
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            connect.desconectar();
+        }));
 
         // COMANDOS NA MAIN UTILIZANDO BANCO DE DADOS - COMEÇO
         
         
         
         // FIM
-        
-        // Desconectando do Banco de Dados
-        connect.desconectar();
 
     }
 
