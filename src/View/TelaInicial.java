@@ -1,19 +1,25 @@
 package View;
 
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import Model.Tarefa;
+import Model.TarefaDAO;
+import java.awt.List;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class TelaInicial extends javax.swing.JFrame {
 
     public TelaInicial() {
         initComponents();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableTasks = new javax.swing.JTable();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -29,12 +35,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Tarefa", "Descrição"
@@ -48,12 +51,12 @@ public class TelaInicial extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(0);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(200);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(600);
+        jScrollPane1.setViewportView(jTableTasks);
+        if (jTableTasks.getColumnModel().getColumnCount() > 0) {
+            jTableTasks.getColumnModel().getColumn(0).setMinWidth(0);
+            jTableTasks.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTableTasks.getColumnModel().getColumn(1).setMinWidth(200);
+            jTableTasks.getColumnModel().getColumn(2).setMinWidth(600);
         }
 
         jLayeredPane2.setBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("Table.selectionBackground"), 3, true));
@@ -168,6 +171,25 @@ public class TelaInicial extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void ViewJTable() {
+        DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
+        jTableTasks.setRowSorter(new TableRowSorter(model));
+    }
+
+    public void atualizarTabela() {
+        DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
+        model.setRowCount(0); // Limpa todas as linhas da tabela
+
+        TarefaDAO tarefaDAO = new TarefaDAO();
+        ArrayList<Tarefa> tarefas = tarefaDAO.getAllTasks(); // Chama o método para obter todas as tarefas
+
+        for (Tarefa tarefa : tarefas) {
+            Object[] rowData = {tarefa.getId(), tarefa.getNome(), tarefa.getDescricao()};
+            model.addRow(rowData); // Adiciona uma nova linha com os dados da tarefa
+        }
+    }
+
+
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuSairActionPerformed
@@ -198,6 +220,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuOpcoes;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableTasks;
     // End of variables declaration//GEN-END:variables
 }
