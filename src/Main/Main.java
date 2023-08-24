@@ -1,11 +1,8 @@
 package Main;
 
 import Database.ConexaoSQLite;
-import Model.Tarefa;
-import Model.TarefaDAO;
 import View.TelaInicial;
 import com.formdev.flatlaf.*;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class Main {
@@ -21,10 +18,14 @@ public class Main {
         
         // Mostra a tela inicial
         new TelaInicial().setVisible(true);
-
+        
         // Chamando banco de dados e conectando
         ConexaoSQLite connect = new ConexaoSQLite();
         connect.conectar();
+        
+        // COMANDOS COM BANCO DE DADOS AQUI DENTRO
+        
+        new TelaInicial().atualizarTabela();
         
         // Desconectando do Banco de Dados
         connect.desconectar();
