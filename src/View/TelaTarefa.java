@@ -4,6 +4,7 @@ import Database.ConexaoSQLite;
 import Model.Tarefa;
 import Model.TarefaDAO;
 import View.util.LimitChars;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -42,6 +43,15 @@ public class TelaTarefa extends javax.swing.JFrame {
         int currentCharCount = jTextDescTask.getText().length();
         int remainingChars = 2048 - currentCharCount;
         jNumChar.setText(String.valueOf(remainingChars));
+        
+        
+        if(remainingChars <= 100){
+            jNumChar.setForeground(Color.RED);
+        }else{
+            jNumChar.setForeground(Color.WHITE);
+            
+        }
+        
     }
 
     @SuppressWarnings("unchecked")
