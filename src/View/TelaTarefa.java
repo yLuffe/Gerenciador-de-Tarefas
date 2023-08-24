@@ -58,9 +58,7 @@ public class TelaTarefa extends javax.swing.JFrame {
             jNumChar.setForeground(Color.RED);
         } else {
             jNumChar.setForeground(Color.WHITE);
-
         }
-
     }
 
     @SuppressWarnings("unchecked")

@@ -21,7 +21,7 @@ public class Tarefa {
         this.nome = nome;
         this.descricao = descricao;
     }
-    
+
     // Getters and Setters
     public int getId() {
         return id;
