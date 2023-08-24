@@ -1,7 +1,10 @@
 package View;
 
 import Model.Tarefa;
+import Model.TarefaDAO;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
+import org.sqlite.SQLiteException;
 
 public class TelaTarefa extends javax.swing.JFrame {
 
@@ -49,6 +52,11 @@ public class TelaTarefa extends javax.swing.JFrame {
         jbuttonCancel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jbuttonCancel.setForeground(new java.awt.Color(100, 150, 100));
         jbuttonCancel.setText("✖");
+        jbuttonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbuttonCancelActionPerformed(evt);
+            }
+        });
 
         jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jbuttonSaveTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -164,10 +172,12 @@ public class TelaTarefa extends javax.swing.JFrame {
 
     private void jbuttonSaveTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonSaveTaskActionPerformed
 
+        // Bloco Try-Catch para validação de entrada
         try {
             String taskName = jTextNomeTask.getText().trim();
             String taskDesc = jTextDescTask.getText().trim();
 
+            // Verificando se campos não estão vazios
             if (taskName.isEmpty() || taskName == null) {
                 throw new Exception("Oops! Nome da tarefa em branco? Defina um nome para sua tarefa!");
             }
@@ -176,10 +186,36 @@ public class TelaTarefa extends javax.swing.JFrame {
                 throw new Exception("Eita, parece que alguém esqueceu a descrição. O campo descrição não pode estar vazio! ");
             }
 
+            // Criando a nova tarefa
+            Tarefa newTask = new Tarefa(taskName, taskDesc);
+
+            // Inserindo no banco de dados
+            boolean insertDB = new TarefaDAO().addTask(newTask);
+
+            if (insertDB == true) {
+                JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                throw new Exception("Erro ao criar a tarefa, verifique os campos e tente novamente!");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
     }//GEN-LAST:event_jbuttonSaveTaskActionPerformed
+
+    private void jbuttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonCancelActionPerformed
+        try {
+            String text = """
+                          Deseja mesmo cancelar a tarefa e volta para tela inicial?
+                          Todos os dados não salvos serão perdidos para sempre!""";
+            
+            int option = JOptionPane.showConfirmDialog(null, text, "Confirmação", JOptionPane.YES_NO_OPTION);
+
+            if (option == JOptionPane.YES_OPTION) {
+                this.dispose();
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jbuttonCancelActionPerformed
 
     public static void main(String args[]) {
         /* Create and display the form */

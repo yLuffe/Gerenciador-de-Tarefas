@@ -13,14 +13,17 @@ public class TarefaDAO {
     }
 
     // Create
-    public void addTask(Tarefa task) {
+    public boolean addTask(Tarefa task) {
         String sql = "INSERT INTO tb_tarefas (nome_task, desc_task) VALUES (?, ?)";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setString(1, task.getNome());
             stmt.setString(2, task.getDescricao());
             stmt.executeUpdate();
+
+            return true; // Inserido com Sucesso
         } catch (SQLException e) {
             e.printStackTrace();
+            return false; // Falha ao Inserir
         }
     }
 
