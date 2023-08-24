@@ -255,6 +255,7 @@ public final class TelaInicial extends javax.swing.JFrame {
     private void jCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateTaskActionPerformed
         TelaTarefa newTela = new TelaTarefa();
         newTela.setVisible(true);
+        isEdit = false;
     }//GEN-LAST:event_jCreateTaskActionPerformed
 
     // Método Deletar Tarefa
@@ -328,12 +329,6 @@ public final class TelaInicial extends javax.swing.JFrame {
                 edit.setjTextNomeTask(nameTask);
                 edit.setjTextDescTask(descTask);
                 edit.setjLabelTitulo("Editar Tarefa");
-//            
-//            //
-//            Tarefa newTask = new Tarefa();
-//            newTask.setId(idTask);
-
-                //new TarefaDAO().updateTask(newTask);
             }
         } catch (Exception e) {
 

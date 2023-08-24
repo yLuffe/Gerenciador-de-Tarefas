@@ -76,7 +76,7 @@ public class TarefaDAO {
     public ArrayList<Tarefa> getAllTasks() {
         ArrayList<Tarefa> tarefas = new ArrayList<>();
         String sql = "SELECT * FROM tb_tarefas";
-        
+
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 
             while (resultSet.next()) {
