@@ -1,11 +1,9 @@
 package View;
 
-import Database.ConexaoSQLite;
 import Model.Tarefa;
 import Model.TarefaDAO;
 import View.util.LimitChars;
 import java.awt.Color;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
