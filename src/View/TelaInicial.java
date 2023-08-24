@@ -56,6 +56,11 @@ public final class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Tarefas Pessoais");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -255,6 +260,7 @@ public final class TelaInicial extends javax.swing.JFrame {
     private void jCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateTaskActionPerformed
         TelaTarefa newTela = new TelaTarefa();
         newTela.setVisible(true);
+        isEdit = false;
     }//GEN-LAST:event_jCreateTaskActionPerformed
 
     // Método Deletar Tarefa
@@ -328,12 +334,6 @@ public final class TelaInicial extends javax.swing.JFrame {
                 edit.setjTextNomeTask(nameTask);
                 edit.setjTextDescTask(descTask);
                 edit.setjLabelTitulo("Editar Tarefa");
-//            
-//            //
-//            Tarefa newTask = new Tarefa();
-//            newTask.setId(idTask);
-
-                //new TarefaDAO().updateTask(newTask);
             }
         } catch (Exception e) {
 
@@ -342,6 +342,10 @@ public final class TelaInicial extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         atualizarTabela();    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        atualizarTabela();
+    }//GEN-LAST:event_formWindowActivated
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
