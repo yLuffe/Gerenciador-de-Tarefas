@@ -2,15 +2,15 @@ package View;
 
 import Model.Tarefa;
 import Model.TarefaDAO;
-import java.awt.List;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
-public class TelaInicial extends javax.swing.JFrame {
+public final class TelaInicial extends javax.swing.JFrame {
 
     public TelaInicial() {
         initComponents();
+        atualizarTabela();
     }
 
     @SuppressWarnings("unchecked")
@@ -171,24 +171,25 @@ public class TelaInicial extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void ViewJTable() {
-        DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
-        jTableTasks.setRowSorter(new TableRowSorter(model));
-    }
-
     public void atualizarTabela() {
-        DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
-        model.setRowCount(0); // Limpa todas as linhas da tabela
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
+            model.setRowCount(0); // Limpa todas as linhas da tabela
 
-        TarefaDAO tarefaDAO = new TarefaDAO();
-        ArrayList<Tarefa> tarefas = tarefaDAO.getAllTasks(); // Chama o método para obter todas as tarefas
+            TarefaDAO tarefaDAO = new TarefaDAO();
+            ArrayList<Tarefa> tarefas = tarefaDAO.getAllTasks(); // Chama o método para obter todas as tarefas
 
-        for (Tarefa tarefa : tarefas) {
-            Object[] rowData = {tarefa.getId(), tarefa.getNome(), tarefa.getDescricao()};
-            model.addRow(rowData); // Adiciona uma nova linha com os dados da tarefa
+            for (Tarefa task : tarefas) {
+                model.addRow(new Object[]{
+                    task.getId(),
+                    task.getNome(),
+                    task.getDescricao()
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar a tabela\n" + e, "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         System.exit(0);

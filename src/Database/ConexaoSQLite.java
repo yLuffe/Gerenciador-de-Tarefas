@@ -53,12 +53,12 @@ public class ConexaoSQLite {
             return null;
         }
     }
-    
+
     //Cria um PreparedStatement com a consulta SQL dada
-    public PreparedStatement criarPreparedStatement(String sql){
-        try{
+    public PreparedStatement criarPreparedStatement(String sql) {
+        try {
             return this.conexao.prepareStatement(sql);
-        }catch(SQLException e){
+        } catch (SQLException e) {
             return null;
         }
     }

@@ -5,6 +5,7 @@
         <group>
             <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/Database/ConexaoSQLite.java</file>
             <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/Model/Tarefa.java</file>
+            <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/View/TelaInicial.java</file>
             <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/Main/Main.java</file>
             <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/Model/TarefaDAO.java</file>
         </group>
