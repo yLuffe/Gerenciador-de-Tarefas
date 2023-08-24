@@ -1,8 +1,11 @@
 package Main;
 
 import Database.ConexaoSQLite;
+import Model.Tarefa;
+import Model.TarefaDAO;
 import View.TelaInicial;
 import com.formdev.flatlaf.*;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class Main {
@@ -22,6 +25,8 @@ public class Main {
         // Chamando banco de dados e conectando
         ConexaoSQLite connect = new ConexaoSQLite();
         connect.conectar();
+        
+        // Desconectando do Banco de Dados
         connect.desconectar();
 
     }

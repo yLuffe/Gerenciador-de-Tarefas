@@ -29,7 +29,7 @@ public class TarefaDAO {
 
     // Read
     public Tarefa getTaskById(int id) {
-        String sql = "SELECT * FROM tb_tarefas WHERE id = ?";
+        String sql = "SELECT * FROM tb_tarefas WHERE id_task = ?";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet resultSet = stmt.executeQuery()) {
@@ -47,7 +47,7 @@ public class TarefaDAO {
 
     // Update
     public void updateTask(Tarefa task) {
-        String sql = "UPDATE tb_tarefas SET nome_task = ?, desc_task = ? WHERE id = ? ";
+        String sql = "UPDATE tb_tarefas SET nome_task = ?, desc_task = ? WHERE id_task = ? ";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setString(1, task.getNome());
             stmt.setString(2, task.getDescricao());
@@ -61,7 +61,7 @@ public class TarefaDAO {
 
     // Delete
     public void deleteTarefa(int id) {
-        String sql = "DELETE FROM tb_tarefas WHERE id = ?";
+        String sql = "DELETE FROM tb_tarefas WHERE id_task = ?";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
