@@ -4,7 +4,10 @@ import Database.ConexaoSQLite;
 import Model.Tarefa;
 import Model.TarefaDAO;
 import View.util.LimitChars;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class TelaTarefa extends javax.swing.JFrame {
 
@@ -14,6 +17,31 @@ public class TelaTarefa extends javax.swing.JFrame {
         // Limitando Caracteres dos Campos
         jTextNomeTask.setDocument(new LimitChars(48));
         jTextDescTask.setDocument(new LimitChars(2048));
+
+        jTextDescTask.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateCharCount();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateCharCount();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateCharCount();
+            }
+        });
+
+        updateCharCount();
+    }
+
+    private void updateCharCount() {
+        int currentCharCount = jTextDescTask.getText().length();
+        int remainingChars = 2048 - currentCharCount;
+        jNumChar.setText(String.valueOf(remainingChars));
     }
 
     @SuppressWarnings("unchecked")
@@ -31,6 +59,7 @@ public class TelaTarefa extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextDescTask = new javax.swing.JTextArea();
+        jNumChar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Criar Tarefa");
@@ -108,11 +137,14 @@ public class TelaTarefa extends javax.swing.JFrame {
         jTextDescTask.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane1.setViewportView(jTextDescTask);
 
+        jNumChar.setText("2048");
+
         jLayeredPane3.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jTextNomeTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jSeparator1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(jNumChar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -123,16 +155,15 @@ public class TelaTarefa extends javax.swing.JFrame {
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(759, 759, 759))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane3Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextNomeTask)))
-                        .addGap(10, 10, 10))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jNumChar))
+                    .addComponent(jSeparator1)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextNomeTask)))
+                .addGap(10, 10, 10))
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +175,9 @@ public class TelaTarefa extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
-                .addComponent(jLabel4)
+                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jNumChar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -227,6 +260,7 @@ public class TelaTarefa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbuttonCancelActionPerformed
 
+    
     public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -242,6 +276,7 @@ public class TelaTarefa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JLabel jNumChar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextDescTask;
