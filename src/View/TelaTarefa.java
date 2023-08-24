@@ -10,6 +10,18 @@ import javax.swing.event.DocumentListener;
 
 public class TelaTarefa extends javax.swing.JFrame {
 
+    public void setjTextNomeTask(String nome) {
+        jTextNomeTask.setText(nome);
+    }
+
+    public void setjTextDescTask(String desc) {
+        jTextDescTask.setText(desc);
+    }
+
+    public void setjLabelTitulo(String title) {
+        jLabelTitulo.setText(title);
+    }
+
     public TelaTarefa() {
         initComponents();
 
@@ -41,15 +53,14 @@ public class TelaTarefa extends javax.swing.JFrame {
         int currentCharCount = jTextDescTask.getText().length();
         int remainingChars = 2048 - currentCharCount;
         jNumChar.setText(String.valueOf(remainingChars));
-        
-        
-        if(remainingChars <= 100){
+
+        if (remainingChars <= 100) {
             jNumChar.setForeground(Color.RED);
-        }else{
+        } else {
             jNumChar.setForeground(Color.WHITE);
-            
+
         }
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -57,7 +68,7 @@ public class TelaTarefa extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane2 = new javax.swing.JLayeredPane();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
         jbuttonSaveTask = new javax.swing.JButton();
         jbuttonCancel = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
@@ -69,15 +80,15 @@ public class TelaTarefa extends javax.swing.JFrame {
         jTextDescTask = new javax.swing.JTextArea();
         jNumChar = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Criar Tarefa");
         setResizable(false);
 
         jLayeredPane2.setBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("Table.selectionBackground"), 3, true));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 100, 100));
-        jLabel1.setText("Nova Tarefa");
+        jLabelTitulo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(255, 100, 100));
+        jLabelTitulo.setText("Nova Tarefa");
 
         jbuttonSaveTask.setBackground(new java.awt.Color(255, 200, 200));
         jbuttonSaveTask.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -99,7 +110,7 @@ public class TelaTarefa extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabelTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jbuttonSaveTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jbuttonCancel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -109,7 +120,7 @@ public class TelaTarefa extends javax.swing.JFrame {
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel1)
+                .addComponent(jLabelTitulo)
                 .addGap(538, 538, 538)
                 .addComponent(jbuttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
@@ -123,7 +134,7 @@ public class TelaTarefa extends javax.swing.JFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jbuttonSaveTask, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbuttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabelTitulo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -249,7 +260,8 @@ public class TelaTarefa extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         } finally {
-//            new ConexaoSQLite().desconectar();
+            TelaInicial newTela = new TelaInicial();
+            newTela.atualizarTabela();
         }
     }//GEN-LAST:event_jbuttonSaveTaskActionPerformed
 
@@ -268,7 +280,6 @@ public class TelaTarefa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbuttonCancelActionPerformed
 
-    
     public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -279,9 +290,9 @@ public class TelaTarefa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLabel jNumChar;

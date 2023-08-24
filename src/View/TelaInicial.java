@@ -8,8 +8,25 @@ import javax.swing.table.DefaultTableModel;
 
 public final class TelaInicial extends javax.swing.JFrame {
 
-    private static int idTask;
+    // Variavel que armaeza id quando clicar na tabela
+    private static int idTask = -1;
+    private static String nameTask;
+    private static String descTask;
+
+    public static int getIdTask() {
+        return idTask;
+    }
+
+    public static String getNameTask() {
+        return nameTask;
+    }
+
+    public static String getDescTask() {
+        return descTask;
+    }
     
+    
+
     public TelaInicial() {
         initComponents();
         atualizarTabela();
@@ -82,6 +99,11 @@ public final class TelaInicial extends javax.swing.JFrame {
         jUpdateTask.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jUpdateTask.setForeground(new java.awt.Color(80, 100, 120));
         jUpdateTask.setText("Editar Tarefa");
+        jUpdateTask.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jUpdateTaskActionPerformed(evt);
+            }
+        });
 
         jDeleteTask.setBackground(new java.awt.Color(255, 200, 200));
         jDeleteTask.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -183,6 +205,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // Método para carregar a tabela
     public void atualizarTabela() {
         try {
             DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
@@ -203,29 +226,99 @@ public final class TelaInicial extends javax.swing.JFrame {
         }
     }
 
+    // Método para fechar o sistema
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuSairActionPerformed
 
+    // Método abrir TelaTarefa
     private void jCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateTaskActionPerformed
         TelaTarefa newTela = new TelaTarefa();
         newTela.setVisible(true);
     }//GEN-LAST:event_jCreateTaskActionPerformed
 
+    // Método Deletar Tarefa
     private void jDeleteTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteTaskActionPerformed
-        
+        try {
+            // Mensagem confirmação
+            String text = "Esta ação irá remover permanentemente a tarefa: "
+                    + nameTask
+                    + "\nDeseja continuar?";
+
+            // Verifica se tem uma tarefa selecionada
+            if (idTask != -1) {
+
+                // Cria uma caixa de confirmação
+                int option = JOptionPane.showConfirmDialog(null, text, "Confirmação", JOptionPane.YES_NO_OPTION);
+
+                // Deleta do banco de dados
+                if (option == JOptionPane.YES_OPTION) {
+                    new TarefaDAO().deleteTarefa(idTask);
+                    JOptionPane.showMessageDialog(null, "Tarefa deletada com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+                    idTask = -1;
+                }
+                idTask = -1;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("NPE em TelaInicial Delete Tarefa)" + e);
+
+        } catch (Exception e) {
+            System.out.println("Exception Delete Tarefa" + e);
+
+        } finally {
+            atualizarTabela();
+        }
     }//GEN-LAST:event_jDeleteTaskActionPerformed
 
+    // Método pegar ID tarefa Seleciona em jTableTasks
     private void jTableTasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTasksMouseClicked
-        DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
-        int selectedRow = jTableTasks.getSelectedRow();
-        Object idValue = model.getValueAt(selectedRow, 0);
-        System.out.println(idValue);
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
+            int selectedRow = jTableTasks.getSelectedRow();
+
+            if (selectedRow >= 0) { // Verifica se alguma linha foi selecionada
+                Object idValue = model.getValueAt(selectedRow, 0);
+                Object nomeValue = model.getValueAt(selectedRow, 1);
+                Object descricaoValue = model.getValueAt(selectedRow, 2);
+
+                idTask = (int) idValue;
+                nameTask = (String) nomeValue;
+                descTask = (String) descricaoValue;
+            }
+        } catch (IndexOutOfBoundsException e) {
+
+            System.out.println("Nenhuma linha selecionada ou índice inválido." + e);
+        } catch (Exception e) {
+            System.out.println("Erro jTableTasksMouseClicked" + e);
+        }
+
     }//GEN-LAST:event_jTableTasksMouseClicked
+    
+    // Método edição tarefa
+    private void jUpdateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateTaskActionPerformed
+        try {
+            if (idTask != -1) {// Abre a tela para edição da tarefa
+
+                TelaTarefa edit = new TelaTarefa();
+
+                edit.setVisible(true);
+
+                edit.setjTextNomeTask(nameTask);
+                edit.setjTextDescTask(descTask);
+                edit.setjLabelTitulo("Editar Tarefa");
+//            
+//            //
+//            Tarefa newTask = new Tarefa();
+//            newTask.setId(idTask);
+
+                //new TarefaDAO().updateTask(newTask);
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_jUpdateTaskActionPerformed
 
     public static void main(String args[]) {
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaInicial().setVisible(true);
