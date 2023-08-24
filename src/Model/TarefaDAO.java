@@ -2,7 +2,6 @@ package Model;
 
 import java.sql.*;
 import Database.ConexaoSQLite;
-import java.awt.List;
 import java.util.ArrayList;
 
 public class TarefaDAO {
@@ -71,27 +70,25 @@ public class TarefaDAO {
             e.printStackTrace();
         }
     }
-    
-    public ArrayList<Tarefa> getAllTasks() {
-    ArrayList<Tarefa> tarefas = new ArrayList<>();
-    
-    String sql = "SELECT * FROM tb_tarefas";
-    try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql);
-         ResultSet resultSet = stmt.executeQuery()) {
-        
-        while (resultSet.next()) {
-            int id = resultSet.getInt("id_task");
-            String nome = resultSet.getString("nome_task");
-            String descricao = resultSet.getString("desc_task");
-            Tarefa tarefa = new Tarefa(id, nome, descricao);
-            tarefas.add(tarefa);
-        }
-        
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    
-    return tarefas;
-}
-}
 
+    public ArrayList<Tarefa> getAllTasks() {
+        ArrayList<Tarefa> tarefas = new ArrayList<>();
+        String sql = "SELECT * FROM tb_tarefas";
+        
+        try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_task");
+                String nome = resultSet.getString("nome_task");
+                String descricao = resultSet.getString("desc_task");
+                Tarefa tarefa = new Tarefa(id, nome, descricao);
+                tarefas.add(tarefa);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tarefas;
+    }
+}
