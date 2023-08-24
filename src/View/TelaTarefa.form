@@ -65,7 +65,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jLabelTitulo" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="538" max="-2" attributes="0"/>
+                  <EmptySpace pref="538" max="32767" attributes="0"/>
                   <Component id="jbuttonCancel" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="jbuttonSaveTask" min="-2" pref="40" max="-2" attributes="0"/>
@@ -102,13 +102,13 @@
         <Component class="javax.swing.JButton" name="jbuttonSaveTask">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c8" green="c8" red="ff" type="rgb"/>
+              <Color blue="c8" green="f0" red="c8" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="24" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="64" green="64" red="ff" type="rgb"/>
+              <Color blue="64" green="96" red="64" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x2714;"/>
           </Properties>
@@ -119,13 +119,13 @@
         <Component class="javax.swing.JButton" name="jbuttonCancel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c8" green="f0" red="c8" type="rgb"/>
+              <Color blue="c8" green="c8" red="ff" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="24" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="64" green="96" red="64" type="rgb"/>
+              <Color blue="64" green="64" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x2716;"/>
           </Properties>

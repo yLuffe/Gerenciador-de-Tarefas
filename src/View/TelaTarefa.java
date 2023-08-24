@@ -90,9 +90,9 @@ public class TelaTarefa extends javax.swing.JFrame {
         jLabelTitulo.setForeground(new java.awt.Color(255, 100, 100));
         jLabelTitulo.setText("Nova Tarefa");
 
-        jbuttonSaveTask.setBackground(new java.awt.Color(255, 200, 200));
+        jbuttonSaveTask.setBackground(new java.awt.Color(200, 240, 200));
         jbuttonSaveTask.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jbuttonSaveTask.setForeground(new java.awt.Color(255, 100, 100));
+        jbuttonSaveTask.setForeground(new java.awt.Color(100, 150, 100));
         jbuttonSaveTask.setText("✔");
         jbuttonSaveTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,9 +100,9 @@ public class TelaTarefa extends javax.swing.JFrame {
             }
         });
 
-        jbuttonCancel.setBackground(new java.awt.Color(200, 240, 200));
+        jbuttonCancel.setBackground(new java.awt.Color(255, 200, 200));
         jbuttonCancel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jbuttonCancel.setForeground(new java.awt.Color(100, 150, 100));
+        jbuttonCancel.setForeground(new java.awt.Color(255, 100, 100));
         jbuttonCancel.setText("✖");
         jbuttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +121,7 @@ public class TelaTarefa extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabelTitulo)
-                .addGap(538, 538, 538)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 538, Short.MAX_VALUE)
                 .addComponent(jbuttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jbuttonSaveTask, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,23 +245,35 @@ public class TelaTarefa extends javax.swing.JFrame {
 
             // Criando a nova tarefa
             Tarefa newTask = new Tarefa(taskName, taskDesc);
+            if (new TelaInicial().IsEdit() != true) { // Comando se for salvar nova tarefa
+                // Inserindo no banco de dados
+                boolean insertDB = new TarefaDAO().addTask(newTask);
 
-            // Inserindo no banco de dados
-            boolean insertDB = new TarefaDAO().addTask(newTask);
+                if (insertDB == true) {
+                    JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    throw new Exception("Erro ao criar a tarefa, verifique os campos e tente novamente!");
+                }
+            } else { // Comando se for editar tarefa
+                newTask.setId(new TelaInicial().getIdTask());
+                boolean insertDB = new TarefaDAO().updateTask(newTask);
 
-            if (insertDB == true) {
-                JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            } else {
-                throw new Exception("Erro ao criar a tarefa, verifique os campos e tente novamente!");
+                if (insertDB == true) {
+                    JOptionPane.showMessageDialog(null, "Tarefa atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    throw new Exception("Erro ao editar a tarefa, verifique os campos e tente novamente!");
+                }
+
             }
+
         } catch (NullPointerException e) {
-            System.out.println("NPE - New Task");
+            System.out.println("NPE - New or Edit Task");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         } finally {
-            TelaInicial newTela = new TelaInicial();
-            newTela.atualizarTabela();
+            new TelaInicial().atualizarTabela();
         }
     }//GEN-LAST:event_jbuttonSaveTaskActionPerformed
 

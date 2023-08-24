@@ -47,7 +47,7 @@ public class TarefaDAO {
     }
 
     // Update
-    public void updateTask(Tarefa task) {
+    public boolean updateTask(Tarefa task) {
         String sql = "UPDATE tb_tarefas SET nome_task = ?, desc_task = ? WHERE id_task = ? ";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setString(1, task.getNome());
@@ -55,8 +55,10 @@ public class TarefaDAO {
             stmt.setInt(3, task.getId());
 
             stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
