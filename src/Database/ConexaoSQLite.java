@@ -37,10 +37,14 @@ public class ConexaoSQLite {
                 this.conexao.close();
             }
 
+        } catch (NullPointerException e) {
+            System.err.println("ConexaoSQLite().desconectar()" + e.getMessage());
+
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return false;
         }
+
         System.out.println("Desconectado!");
         return true;
     }

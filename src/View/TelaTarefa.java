@@ -10,19 +10,17 @@ import javax.swing.event.DocumentListener;
 
 public class TelaTarefa extends javax.swing.JFrame {
 
-    public void setjTextNomeTask(String nome) {
-        jTextNomeTask.setText(nome);
+    public void setEditScreen(Tarefa task) {
+        jTextNomeTask.setText(task.getNome());
+        jTextDescTask.setText(task.getDescricao());
+        jLabelTitulo.setText("Edit");
+        setTitle("Editar Tarefa");
     }
 
-    public void setjTextDescTask(String desc) {
-        jTextDescTask.setText(desc);
-    }
+    Tarefa task = null;
 
-    public void setjLabelTitulo(String title) {
-        jLabelTitulo.setText(title);
-    }
-
-    public TelaTarefa() {
+    public TelaTarefa(Tarefa tarefa) {
+        this.task = tarefa;
         initComponents();
 
         // Limitando Caracteres dos Campos
@@ -229,33 +227,24 @@ public class TelaTarefa extends javax.swing.JFrame {
 
         // Bloco Try-Catch para validação de entrada
         try {
-            String taskName = jTextNomeTask.getText().trim();
-            String taskDesc = jTextDescTask.getText().trim();
+
+            this.task.setNome(jTextNomeTask.getText().trim());
+            this.task.setDescricao(jTextDescTask.getText().trim());
 
             // Verificando se campos não estão vazios
-            if (taskName.isEmpty() || taskName == null) {
+            if (this.task.getNome().isEmpty() || this.task.getNome() == null) {
                 throw new Exception("Oops! Nome da tarefa em branco? Defina um nome para sua tarefa!");
             }
 
-            if (taskDesc.isEmpty() || taskName == null) {
+            if (this.task.getDescricao().isEmpty() || this.task.getDescricao() == null) {
                 throw new Exception("Eita, parece que alguém esqueceu a descrição. O campo descrição não pode estar vazio! ");
             }
 
             // Criando a nova tarefa
-            Tarefa newTask = new Tarefa(taskName, taskDesc);
-            if (new TelaInicial().IsEdit() != true) { // Comando se for salvar nova tarefa
-                // Inserindo no banco de dados
-                boolean insertDB = new TarefaDAO().addTask(newTask);
+            if (this.task.getId() > 0) { // Comando se for editar tarefa      
+                System.out.println(this.task);
 
-                if (insertDB == true) {
-                    JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    this.dispose();
-                } else {
-                    throw new Exception("Erro ao criar a tarefa, verifique os campos e tente novamente!");
-                }
-            } else { // Comando se for editar tarefa
-                newTask.setId(new TelaInicial().getIdTask());
-                boolean insertDB = new TarefaDAO().updateTask(newTask);
+                boolean insertDB = new TarefaDAO().updateTask(this.task);
 
                 if (insertDB == true) {
                     JOptionPane.showMessageDialog(null, "Tarefa atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -263,15 +252,21 @@ public class TelaTarefa extends javax.swing.JFrame {
                 } else {
                     throw new Exception("Erro ao editar a tarefa, verifique os campos e tente novamente!");
                 }
+            } else { // Comando se for adicionar tarefa
+                // Inserindo no banco de dados
+                boolean insertDB = new TarefaDAO().addTask(this.task);
 
+                if (insertDB == true) {
+                    JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    throw new Exception("Erro ao criar a tarefa, verifique os campos e tente novamente!");
+                }
             }
-
         } catch (NullPointerException e) {
             System.out.println("NPE - New or Edit Task");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
-        } finally {
-            new TelaInicial().atualizarTabela();
         }
     }//GEN-LAST:event_jbuttonSaveTaskActionPerformed
 
@@ -287,6 +282,7 @@ public class TelaTarefa extends javax.swing.JFrame {
                 this.dispose();
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_jbuttonCancelActionPerformed
 
@@ -294,7 +290,7 @@ public class TelaTarefa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaTarefa().setVisible(true);
+                new TelaTarefa(new Tarefa()).setVisible(true);
             }
         });
     }
