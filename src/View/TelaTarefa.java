@@ -10,31 +10,18 @@ import javax.swing.event.DocumentListener;
 
 public class TelaTarefa extends javax.swing.JFrame {
 
-//    public void setjTextNomeTask(String nome) {
-//        jTextNomeTask.setText(nome);
-//    }
-//
-//    public void setjTextDescTask(String desc) {
-//        jTextDescTask.setText(desc);
-//    }
-//
-//    public void setjLabelTitulo(String title) {
-//        jLabelTitulo.setText(title);
-//    }
-    
-    public void setEditScreen(Tarefa task){
-       jTextNomeTask.setText(task.getNome());
-       jTextDescTask.setText(task.getDescricao());
-       jLabelTitulo.setText("Edit");
-}
+    public void setEditScreen(Tarefa task) {
+        jTextNomeTask.setText(task.getNome());
+        jTextDescTask.setText(task.getDescricao());
+        jLabelTitulo.setText("Edit");
+        setTitle("Editar Tarefa");
+    }
 
     Tarefa task = null;
 
     public TelaTarefa(Tarefa tarefa) {
         this.task = tarefa;
         initComponents();
-        
-        
 
         // Limitando Caracteres dos Campos
         jTextNomeTask.setDocument(new LimitChars(48));
@@ -254,8 +241,6 @@ public class TelaTarefa extends javax.swing.JFrame {
             }
 
             // Criando a nova tarefa
-            // Tarefa newTask = new Tarefa(taskName, taskDesc);
-//            Integer flag = this.task.getId();
             if (this.task.getId() > 0) { // Comando se for editar tarefa      
                 System.out.println(this.task);
 
@@ -277,9 +262,7 @@ public class TelaTarefa extends javax.swing.JFrame {
                 } else {
                     throw new Exception("Erro ao criar a tarefa, verifique os campos e tente novamente!");
                 }
-
             }
-
         } catch (NullPointerException e) {
             System.out.println("NPE - New or Edit Task");
         } catch (Exception e) {

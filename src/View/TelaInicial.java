@@ -10,25 +10,6 @@ public final class TelaInicial extends javax.swing.JFrame {
 
     Tarefa objectTask = new Tarefa(-1, null, null);
 
-    // Variavel que armaeza id quando clicar na tabela
-//    private static int idTask = -1;
-//    private static String nameTask;
-//    private static String descTask;
-//    private static boolean isEdit = false;
-//    public static boolean IsEdit() {
-//        return isEdit;
-//    }
-//
-//    public static int getIdTask() {
-//        return idTask;
-//    }
-//    public static String getNameTask() {
-//        return nameTask;
-//    }
-//
-//    public static String getDescTask() {
-//        return descTask;
-//    }
     public TelaInicial() {
         initComponents();
         atualizarTabela();
@@ -313,40 +294,26 @@ public final class TelaInicial extends javax.swing.JFrame {
                 Object descricaoValue = model.getValueAt(selectedRow, 2);
 
                 this.objectTask = new Tarefa((int) idValue, (String) nomeValue, (String) descricaoValue);
-                System.out.println(objectTask);
-//                idTask = (int) idValue;
-//                nameTask = (String) nomeValue;
-//                descTask = (String) descricaoValue;
             }
         } catch (IndexOutOfBoundsException e) {
-
             System.out.println("Nenhuma linha selecionada ou índice inválido." + e);
         } catch (Exception e) {
             System.out.println("Erro jTableTasksMouseClicked" + e);
         }
-
     }//GEN-LAST:event_jTableTasksMouseClicked
 
     // Método edição tarefa
     private void jUpdateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateTaskActionPerformed
         try {
-            // isEdit = true;
-
             if (objectTask.getId() != -1) {// Abre a tela para edição da tarefa
-
-                TelaTarefa edit = new TelaTarefa(new Tarefa(objectTask.getId(), objectTask.getNome(), objectTask.getDescricao()));
-
+                TelaTarefa edit = new TelaTarefa(objectTask);
                 edit.setVisible(true);
                 edit.setEditScreen(objectTask);
-//                edit.setjTextNomeTask(objectTask.getNome());
-//                edit.setjTextDescTask(objectTask.getDescricao());
-//                edit.setjLabelTitulo("Editar Tarefa");
-                edit.setTitle("Editar Tarefa");
 
                 objectTask.setId(-1);
             }
         } catch (Exception e) {
-
+            System.out.println("jUpdateTaskActionPerformed" + e);
         }
     }//GEN-LAST:event_jUpdateTaskActionPerformed
 
