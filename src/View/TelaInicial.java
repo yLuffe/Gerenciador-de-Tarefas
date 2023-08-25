@@ -1,6 +1,5 @@
 package View;
 
-import Database.ConexaoSQLite;
 import Model.Tarefa;
 import Model.TarefaDAO;
 import java.util.ArrayList;
@@ -9,7 +8,12 @@ import javax.swing.table.DefaultTableModel;
 
 public final class TelaInicial extends javax.swing.JFrame {
 
+    // Objeto de tarefa para manipular dados e verificações
     Tarefa objectTask = new Tarefa(-1, null, null);
+
+    private void minusId() {
+        objectTask.setId(-1);
+    }
 
     public TelaInicial() {
         initComponents();
@@ -27,7 +31,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         jCreateTask = new javax.swing.JButton();
         jUpdateTask = new javax.swing.JButton();
         jDeleteTask = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jReloadButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuOpcoes = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -110,19 +114,19 @@ public final class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton1.setText("↻");
-        jButton1.setToolTipText("Recarregar Tabela");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jReloadButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jReloadButton.setText("↻");
+        jReloadButton.setToolTipText("Recarregar Tabela");
+        jReloadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jReloadButtonActionPerformed(evt);
             }
         });
 
         jLayeredPane2.setLayer(jCreateTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jUpdateTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jDeleteTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jReloadButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -138,7 +142,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                             .addComponent(jCreateTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jReloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5))
         );
         jLayeredPane2Layout.setVerticalGroup(
@@ -149,7 +153,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jUpdateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jReloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jDeleteTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -245,9 +249,7 @@ public final class TelaInicial extends javax.swing.JFrame {
 
     // Método abrir TelaTarefa
     private void jCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateTaskActionPerformed
-        TelaTarefa newTela = new TelaTarefa(new Tarefa());
-        newTela.setVisible(true);
-
+        new TelaTarefa(new Tarefa()).setVisible(true);
     }//GEN-LAST:event_jCreateTaskActionPerformed
 
     // Método Deletar Tarefa
@@ -268,9 +270,9 @@ public final class TelaInicial extends javax.swing.JFrame {
                 if (option == JOptionPane.YES_OPTION) {
                     new TarefaDAO().deleteTarefa(objectTask.getId());
                     //JOptionPane.showMessageDialog(null, "Tarefa deletada com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
-                    objectTask.setId(-1);
+                    minusId();
                 }
-                objectTask.setId(-1);
+                minusId();
             }
         } catch (NullPointerException e) {
             System.out.println("NPE em TelaInicial Delete Tarefa)" + e);
@@ -311,15 +313,15 @@ public final class TelaInicial extends javax.swing.JFrame {
                 edit.setVisible(true);
                 edit.setEditScreen(objectTask);
 
-                objectTask.setId(-1);
+                minusId();
             }
         } catch (Exception e) {
             System.out.println("jUpdateTaskActionPerformed" + e);
         }
     }//GEN-LAST:event_jUpdateTaskActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        atualizarTabela();    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jReloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReloadButtonActionPerformed
+        atualizarTabela();    }//GEN-LAST:event_jReloadButtonActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         atualizarTabela();
@@ -334,7 +336,6 @@ public final class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jCreateTask;
     private javax.swing.JButton jDeleteTask;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -343,6 +344,7 @@ public final class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuOpcoes;
     private javax.swing.JMenuItem jMenuSair;
+    private javax.swing.JButton jReloadButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTasks;
     private javax.swing.JButton jUpdateTask;
