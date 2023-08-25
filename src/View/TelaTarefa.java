@@ -278,7 +278,7 @@ public class TelaTarefa extends javax.swing.JFrame {
     private void jbuttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonCancelActionPerformed
         try {
             String text = """
-                          Deseja mesmo cancelar a tarefa e volta para tela inicial?
+                          Deseja mesmo cancelar e voltar para tela inicial?
                           Todos os dados não salvos serão perdidos para sempre!""";
 
             int option = JOptionPane.showConfirmDialog(null, text, "Confirmação", JOptionPane.YES_NO_OPTION);
