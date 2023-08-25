@@ -50,7 +50,6 @@ public final class TelaInicial extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuOpcoes = new javax.swing.JMenu();
-        jMenuNovaTarefa = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,6 +63,7 @@ public final class TelaInicial extends javax.swing.JFrame {
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        jTableTasks.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTableTasks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -80,6 +80,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableTasks.getTableHeader().setReorderingAllowed(false);
         jTableTasks.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableTasksMouseClicked(evt);
@@ -99,6 +100,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         jCreateTask.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jCreateTask.setForeground(new java.awt.Color(100, 150, 100));
         jCreateTask.setText("Nova Tarefa");
+        jCreateTask.setToolTipText("Criar Nova Tarefa");
         jCreateTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCreateTaskActionPerformed(evt);
@@ -109,6 +111,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         jUpdateTask.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jUpdateTask.setForeground(new java.awt.Color(80, 100, 120));
         jUpdateTask.setText("Editar Tarefa");
+        jUpdateTask.setToolTipText("Editar Tarefa");
         jUpdateTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUpdateTaskActionPerformed(evt);
@@ -119,6 +122,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         jDeleteTask.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jDeleteTask.setForeground(new java.awt.Color(255, 100, 100));
         jDeleteTask.setText("Apagar");
+        jDeleteTask.setToolTipText("Deletar Tarefa");
         jDeleteTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDeleteTaskActionPerformed(evt);
@@ -127,6 +131,7 @@ public final class TelaInicial extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButton1.setText("↻");
+        jButton1.setToolTipText("Recarregar Tabela");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -152,7 +157,7 @@ public final class TelaInicial extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(5, 5, 5))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +168,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                 .addComponent(jUpdateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
                 .addComponent(jDeleteTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -193,9 +198,6 @@ public final class TelaInicial extends javax.swing.JFrame {
         );
 
         jMenuOpcoes.setText("Opções");
-
-        jMenuNovaTarefa.setText("Nova Tarefa");
-        jMenuOpcoes.add(jMenuNovaTarefa);
 
         jMenuSair.setText("Sair");
         jMenuSair.addActionListener(new java.awt.event.ActionListener() {
@@ -334,6 +336,9 @@ public final class TelaInicial extends javax.swing.JFrame {
                 edit.setjTextNomeTask(nameTask);
                 edit.setjTextDescTask(descTask);
                 edit.setjLabelTitulo("Editar Tarefa");
+                edit.setTitle("Editar Tarefa");
+                
+                idTask = -1;
             }
         } catch (Exception e) {
 
@@ -362,7 +367,6 @@ public final class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuNovaTarefa;
     private javax.swing.JMenu jMenuOpcoes;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JScrollPane jScrollPane1;
