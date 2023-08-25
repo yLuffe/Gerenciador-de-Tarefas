@@ -1,5 +1,6 @@
 package View;
 
+import Database.ConexaoSQLite;
 import Model.Tarefa;
 import Model.TarefaDAO;
 import java.util.ArrayList;
@@ -253,7 +254,7 @@ public final class TelaInicial extends javax.swing.JFrame {
     private void jDeleteTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteTaskActionPerformed
         try {
             // Mensagem confirmação
-            String text = "Esta ação irá remover permanentemente a tarefa: "
+            String text = "Esta ação irá remover permanentemente a tarefa:\n"
                     + objectTask.getNome()
                     + "\nDeseja continuar?";
 
@@ -266,7 +267,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                 // Deleta do banco de dados
                 if (option == JOptionPane.YES_OPTION) {
                     new TarefaDAO().deleteTarefa(objectTask.getId());
-                    JOptionPane.showMessageDialog(null, "Tarefa deletada com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "Tarefa deletada com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
                     objectTask.setId(-1);
                 }
                 objectTask.setId(-1);
