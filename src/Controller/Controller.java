@@ -18,20 +18,22 @@ public class Controller {
     public Controller(TelaInicial telaInicial) {
         this.telaInicialView = telaInicial;
         // Atualiza a Tabela
-        this.telaInicialView.atualizarTabela(this.listarTarefas("null"));
+        this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
     }
 
     // Create
     public boolean criarTarefa(Tarefa task) {
         boolean isCreated = db.addTask(task);
         // Atualiza a Tabela
-        this.telaInicialView.atualizarTabela(this.listarTarefas("null"));
+        this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
         return isCreated;
     }
 
     // Read
+    String selectedFilter = " ";
     public ArrayList<Tarefa> listarTarefas(String filter) {
         ArrayList<Tarefa> tarefas = db.getAllTasks(filter);
+        this.selectedFilter = filter;
         return tarefas;
     }
 
@@ -39,7 +41,7 @@ public class Controller {
     public boolean editarTarefa(Tarefa task) {
         boolean isUpdated = db.updateTask(task);
         // Atualiza a Tabela
-        this.telaInicialView.atualizarTabela(this.listarTarefas("null"));
+        this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
         return isUpdated;
     }
 
@@ -47,7 +49,7 @@ public class Controller {
     public void deletarTarefa(int id) {
         db.deleteTarefa(id);
         // Atualiza a Tabela
-        this.telaInicialView.atualizarTabela(this.listarTarefas("null"));
+        this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
     }
     
     // Definir ID para -1
