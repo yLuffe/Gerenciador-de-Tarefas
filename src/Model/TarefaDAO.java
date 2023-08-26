@@ -75,15 +75,13 @@ public class TarefaDAO {
 
     public ArrayList<Tarefa> getAllTasks(String filter) {
         ArrayList<Tarefa> tarefas = new ArrayList<>();
-        String sql = null;
+        String sql;
         
-        switch(filter){
-            case "Nome Crescente" -> sql = "SELECT * FROM tb_tarefas ORDER BY name";
-            
-            case "Nome Decrescente" -> sql = "SELECT * FROM tb_tarefas ORDER BY name DESC";
-                
-            case "null", "Primeira Criada" -> sql = "SELECT * FROM tb_tarefas";
-        }
+        sql = switch (filter) {
+            case "Nome Crescente" -> "SELECT * FROM tb_tarefas ORDER BY name";
+            case "Nome Decrescente" -> "SELECT * FROM tb_tarefas ORDER BY name DESC";
+            default -> "SELECT * FROM tb_tarefas";
+        };
 
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 
