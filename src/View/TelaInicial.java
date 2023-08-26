@@ -1,23 +1,21 @@
 package View;
 
 import Model.Tarefa;
-import Model.TarefaDAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Controller.Controller;
 
 public final class TelaInicial extends javax.swing.JFrame {
 
     // Objeto de tarefa para manipular dados e verificações
-    Tarefa objectTask = new Tarefa(-1, null, null);
-
-    private void minusId() {
-        objectTask.setId(-1);
-    }
+    private Tarefa objectTask = new Tarefa(-1, null, null);
+    
+    Controller controller;
 
     public TelaInicial() {
         initComponents();
-        atualizarTabela();
+        this.controller = new Controller(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +30,8 @@ public final class TelaInicial extends javax.swing.JFrame {
         jUpdateTask = new javax.swing.JButton();
         jDeleteTask = new javax.swing.JButton();
         jReloadButton = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuOpcoes = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -123,10 +123,18 @@ public final class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome Crescente", "Nome Decrescente", "ID", "Descrição" }));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Filtrar por:");
+
         jLayeredPane2.setLayer(jCreateTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jUpdateTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jDeleteTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jReloadButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jComboBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -137,9 +145,11 @@ public final class TelaInicial extends javax.swing.JFrame {
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDeleteTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jUpdateTask, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                            .addComponent(jCreateTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jCreateTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDeleteTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jReloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -152,6 +162,10 @@ public final class TelaInicial extends javax.swing.JFrame {
                 .addComponent(jCreateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jUpdateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jReloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -186,6 +200,11 @@ public final class TelaInicial extends javax.swing.JFrame {
         jMenuOpcoes.setText("Opções");
 
         jMenuItem1.setText("Backup");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenuOpcoes.add(jMenuItem1);
 
         jMenuSair.setText("Sair");
@@ -222,13 +241,10 @@ public final class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Método para carregar a tabela
-    public void atualizarTabela() {
+    public void atualizarTabela(ArrayList<Tarefa> tarefas) {
         try {
             DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
             model.setRowCount(0); // Limpa todas as linhas da tabela
-
-            TarefaDAO tarefaDAO = new TarefaDAO();
-            ArrayList<Tarefa> tarefas = tarefaDAO.getAllTasks(); // Chama o método para obter todas as tarefas
 
             for (Tarefa task : tarefas) {
                 model.addRow(new Object[]{
@@ -249,7 +265,7 @@ public final class TelaInicial extends javax.swing.JFrame {
 
     // Método abrir TelaTarefa
     private void jCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateTaskActionPerformed
-        new TelaTarefa(new Tarefa()).setVisible(true);
+        new TelaTarefa(new Tarefa(), this.controller).setVisible(true);
     }//GEN-LAST:event_jCreateTaskActionPerformed
 
     // Método Deletar Tarefa
@@ -257,22 +273,19 @@ public final class TelaInicial extends javax.swing.JFrame {
         try {
             // Mensagem confirmação
             String text = "Esta ação irá remover permanentemente a tarefa:\n"
-                    + objectTask.getNome()
+                    + this.objectTask.getNome()
                     + "\nDeseja continuar?";
 
             // Verifica se tem uma tarefa selecionada
-            if (objectTask.getId() != -1) {
+            if (this.objectTask.getId() != -1) {
 
                 // Cria uma caixa de confirmação
                 int option = JOptionPane.showConfirmDialog(null, text, "Confirmação", JOptionPane.YES_NO_OPTION);
 
                 // Deleta do banco de dados
                 if (option == JOptionPane.YES_OPTION) {
-                    new TarefaDAO().deleteTarefa(objectTask.getId());
-                    //JOptionPane.showMessageDialog(null, "Tarefa deletada com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
-                    minusId();
-                }
-                minusId();
+                    controller.deletarTarefa(this.objectTask.getId());  
+                }         
             }
         } catch (NullPointerException e) {
             System.out.println("NPE em TelaInicial Delete Tarefa)" + e);
@@ -281,7 +294,7 @@ public final class TelaInicial extends javax.swing.JFrame {
             System.out.println("Exception Delete Tarefa" + e);
 
         } finally {
-            atualizarTabela();
+            controller.minusId(objectTask);
         }
     }//GEN-LAST:event_jDeleteTaskActionPerformed
 
@@ -292,11 +305,11 @@ public final class TelaInicial extends javax.swing.JFrame {
             int selectedRow = jTableTasks.getSelectedRow();
 
             if (selectedRow >= 0) { // Verifica se alguma linha foi selecionada
-                Object idValue = model.getValueAt(selectedRow, 0);
-                Object nomeValue = model.getValueAt(selectedRow, 1);
-                Object descricaoValue = model.getValueAt(selectedRow, 2);
-
-                this.objectTask = new Tarefa((int) idValue, (String) nomeValue, (String) descricaoValue);
+                this.objectTask = new Tarefa( 
+                    (int) model.getValueAt(selectedRow, 0),
+                    (String) model.getValueAt(selectedRow, 1),
+                    (String) model.getValueAt(selectedRow, 2)
+                );
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Nenhuma linha selecionada ou índice inválido." + e);
@@ -308,24 +321,31 @@ public final class TelaInicial extends javax.swing.JFrame {
     // Método edição tarefa
     private void jUpdateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateTaskActionPerformed
         try {
-            if (objectTask.getId() != -1) {// Abre a tela para edição da tarefa
-                TelaTarefa edit = new TelaTarefa(objectTask);
+            if (this.objectTask.getId() != -1) {// Abre a tela para edição da tarefa
+                TelaTarefa edit = new TelaTarefa(this.objectTask, this.controller);
                 edit.setVisible(true);
-                edit.setEditScreen(objectTask);
+                edit.setEditScreen(this.objectTask);
 
-                minusId();
+                //minusId();
             }
         } catch (Exception e) {
             System.out.println("jUpdateTaskActionPerformed" + e);
+        }finally{
+            
         }
+        
     }//GEN-LAST:event_jUpdateTaskActionPerformed
 
     private void jReloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReloadButtonActionPerformed
-        atualizarTabela();    }//GEN-LAST:event_jReloadButtonActionPerformed
-
+        //atualizarTabela();    }//GEN-LAST:event_jReloadButtonActionPerformed
+    }
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        atualizarTabela();
+        //atualizarTabela();
     }//GEN-LAST:event_formWindowActivated
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -336,8 +356,10 @@ public final class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JButton jCreateTask;
     private javax.swing.JButton jDeleteTask;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JMenuBar jMenuBar1;
