@@ -200,6 +200,11 @@ public final class TelaInicial extends javax.swing.JFrame {
         jMenuOpcoes.setText("Opções");
 
         jMenuItem1.setText("Backup");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenuOpcoes.add(jMenuItem1);
 
         jMenuSair.setText("Sair");
@@ -337,6 +342,10 @@ public final class TelaInicial extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         //atualizarTabela();
     }//GEN-LAST:event_formWindowActivated
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
