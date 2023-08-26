@@ -47,6 +47,17 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
+
+    public void validate() throws Exception{
+        if (this.nome.isEmpty() || this.nome == null) {
+            throw new Exception("Oops! Nome da tarefa em branco? Defina um nome para sua tarefa!");
+        }
+
+        if (this.descricao.isEmpty() || this.descricao == null) {
+            throw new Exception("Eita, parece que alguém esqueceu a descrição. O campo descrição não pode estar vazio! ");
+        }
+
+    }
     @Override
     public String toString() {
         return "Tarefa: " + nome + " ID: " + id
