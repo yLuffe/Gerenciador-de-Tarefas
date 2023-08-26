@@ -9,12 +9,9 @@ import Controller.Controller;
 public final class TelaInicial extends javax.swing.JFrame {
 
     // Objeto de tarefa para manipular dados e verificações
-    Tarefa objectTask = new Tarefa(-1, null, null);
+    private Tarefa objectTask = new Tarefa(-1, null, null);
+    
     Controller controller;
-
-    private void minusId() {
-        this.objectTask.setId(-1);
-    }
 
     public TelaInicial() {
         initComponents();
@@ -282,11 +279,8 @@ public final class TelaInicial extends javax.swing.JFrame {
 
                 // Deleta do banco de dados
                 if (option == JOptionPane.YES_OPTION) {
-                    controller.deletarTarefa(this.objectTask.getId());
-                    //JOptionPane.showMessageDialog(null, "Tarefa deletada com sucesso!", "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
-                    minusId();
-                }
-                minusId();
+                    controller.deletarTarefa(this.objectTask.getId());  
+                }         
             }
         } catch (NullPointerException e) {
             System.out.println("NPE em TelaInicial Delete Tarefa)" + e);
@@ -295,7 +289,7 @@ public final class TelaInicial extends javax.swing.JFrame {
             System.out.println("Exception Delete Tarefa" + e);
 
         } finally {
-            //atualizarTabela();
+            controller.minusId(objectTask);
         }
     }//GEN-LAST:event_jDeleteTaskActionPerformed
 

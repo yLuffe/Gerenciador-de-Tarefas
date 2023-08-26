@@ -240,7 +240,7 @@ public class TelaTarefa extends javax.swing.JFrame {
             // Criando a nova tarefa
             if (this.task.getId() > 0) { // Comando se for editar tarefa      
 
-                boolean insertDB = this.controller.editarTarefas(this.task);
+                boolean insertDB = this.controller.editarTarefa(this.task);
 
                 if (insertDB == true) {
                     JOptionPane.showMessageDialog(null, "Tarefa atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

@@ -86,11 +86,9 @@ public class TarefaDAO {
                 Tarefa tarefa = new Tarefa(id, nome, descricao);
                 tarefas.add(tarefa);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return tarefas;
     }
 }
