@@ -15,7 +15,7 @@ public class TarefaDAO {
 
     // Create
     public boolean addTask(Tarefa task) {
-        String sql = "INSERT INTO tb_tarefas (nome_task, desc_task) VALUES (?, ?)";
+        String sql = "INSERT INTO tb_tarefas (name, description) VALUES (?, ?)";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setString(1, task.getNome());
             stmt.setString(2, task.getDescricao());
@@ -30,13 +30,13 @@ public class TarefaDAO {
 
     // Read
     public Tarefa getTaskById(int id) {
-        String sql = "SELECT * FROM tb_tarefas WHERE id_task = ?";
+        String sql = "SELECT * FROM tb_tarefas WHERE id = ?";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet resultSet = stmt.executeQuery()) {
                 if (resultSet.next()) {
-                    String nome = resultSet.getString("nome_task");
-                    String descricao = resultSet.getString("desc_task");
+                    String nome = resultSet.getString("name");
+                    String descricao = resultSet.getString("description");
                     return new Tarefa(id, nome, descricao);
                 }
             }
@@ -48,7 +48,7 @@ public class TarefaDAO {
 
     // Update
     public boolean updateTask(Tarefa task) {
-        String sql = "UPDATE tb_tarefas SET nome_task = ?, desc_task = ? WHERE id_task = ? ";
+        String sql = "UPDATE tb_tarefas SET name = ?, description = ? WHERE id = ? ";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setString(1, task.getNome());
             stmt.setString(2, task.getDescricao());
@@ -64,7 +64,7 @@ public class TarefaDAO {
 
     // Delete
     public void deleteTarefa(int id) {
-        String sql = "DELETE FROM tb_tarefas WHERE id_task = ?";
+        String sql = "DELETE FROM tb_tarefas WHERE id = ?";
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -80,9 +80,9 @@ public class TarefaDAO {
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id_task");
-                String nome = resultSet.getString("nome_task");
-                String descricao = resultSet.getString("desc_task");
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("name");
+                String descricao = resultSet.getString("description");
                 Tarefa tarefa = new Tarefa(id, nome, descricao);
                 tarefas.add(tarefa);
             }

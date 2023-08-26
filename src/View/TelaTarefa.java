@@ -1,12 +1,12 @@
 package View;
 
 import Model.Tarefa;
-import Model.TarefaDAO;
 import View.util.LimitChars;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import Controller.Controller;
 
 public class TelaTarefa extends javax.swing.JFrame {
 
@@ -20,8 +20,10 @@ public class TelaTarefa extends javax.swing.JFrame {
 
     Tarefa task = null;
 
-    public TelaTarefa(Tarefa tarefa) {
+    Controller controller;
+    public TelaTarefa(Tarefa tarefa, Controller controllerTask ) {
         this.task = tarefa;
+        this.controller = controllerTask;
         initComponents();
 
         // Limitando Caracteres dos Campos
@@ -233,18 +235,12 @@ public class TelaTarefa extends javax.swing.JFrame {
             this.task.setDescricao(jTextDesc.getText().trim());
 
             // Verificando se campos não estão vazios
-            if (this.task.getNome().isEmpty() || this.task.getNome() == null) {
-                throw new Exception("Oops! Nome da tarefa em branco? Defina um nome para sua tarefa!");
-            }
-
-            if (this.task.getDescricao().isEmpty() || this.task.getDescricao() == null) {
-                throw new Exception("Eita, parece que alguém esqueceu a descrição. O campo descrição não pode estar vazio! ");
-            }
+            this.task.validate();
 
             // Criando a nova tarefa
             if (this.task.getId() > 0) { // Comando se for editar tarefa      
 
-                boolean insertDB = new TarefaDAO().updateTask(this.task);
+                boolean insertDB = this.controller.editarTarefas(this.task);
 
                 if (insertDB == true) {
                     JOptionPane.showMessageDialog(null, "Tarefa atualizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -255,7 +251,7 @@ public class TelaTarefa extends javax.swing.JFrame {
             } else { // Comando se for adicionar tarefa
 
                 // Inserindo no banco de dados
-                boolean insertDB = new TarefaDAO().addTask(this.task);
+                boolean insertDB = this.controller.criarTarefa(this.task);
 
                 if (insertDB == true) {
                     JOptionPane.showMessageDialog(null, "Tarefa criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -265,7 +261,7 @@ public class TelaTarefa extends javax.swing.JFrame {
                 }
             }
         } catch (NullPointerException e) {
-            System.out.println("NPE - New or Edit Task");
+            System.out.println("NPE - New or Edit Task" + e);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
@@ -291,7 +287,7 @@ public class TelaTarefa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaTarefa(new Tarefa()).setVisible(true);
+                new TelaTarefa(new Tarefa(), null).setVisible(true);
             }
         });
     }

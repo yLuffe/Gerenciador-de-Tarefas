@@ -13,7 +13,7 @@ public class Main {
         UIManager.put("OptionPane.yesButtonText", "Sim");
         UIManager.put("OptionPane.noButtonText", "Não");
 
-        // Ativa o tema Darcula
+        // Ativa o tema Dracula
         FlatDarculaLaf.setup();
 
         // Mostra a tela inicial
