@@ -10,7 +10,7 @@ public class LimitChars extends PlainDocument {
     public enum InputType {
     }
 
-    private int CharsNum;
+    private final int CharsNum;
 
     public LimitChars(int CharsNum) {
         this.CharsNum = CharsNum;

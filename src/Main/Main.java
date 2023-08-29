@@ -1,8 +1,6 @@
 package Main;
 
-import Controller.Controller;
 import Database.ConexaoSQLite;
-import Model.Tarefa;
 import View.TelaInicial;
 import com.formdev.flatlaf.*;
 import javax.swing.UIManager;
