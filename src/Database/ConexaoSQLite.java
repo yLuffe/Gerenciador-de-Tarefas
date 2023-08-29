@@ -6,55 +6,43 @@ import java.sql.*;
 
 public class ConexaoSQLite {
 
-    //Variável para armazenar uma conexão com banco de dados
     private Connection conexao;
 
     public Connection getConexao() {
         return this.conexao;
     }
 
-    //Conexão com o banco de dados
+    //Método para realizar a conexão com o banco de dados
     public boolean conectar() {
-
         try {
             String url = "jdbc:sqlite:database/tarefas_db.db";
 
             this.conexao = DriverManager.getConnection(url);
+            System.out.println("Conexão estabelecida com sucesso!");
 
+            return true;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Erro ao estabelecer a conexão: " + e.getMessage());
+            e.printStackTrace();
+
             return false;
         }
-        System.out.println("Conectado!");
-        return true;
     }
 
-    //Desconexão do banco de dados
+    //Método para realiar a conexão com o banco de dados
     public boolean desconectar() {
-
         try {
-            if (this.conexao.isClosed() == false) {
+            if (this.conexao != null && !this.conexao.isClosed()) {
                 this.conexao.close();
+                System.out.println("Conexão finalizada com sucesso!");
+                return true;
+            } else {
+                System.out.println("Nenhuma conexão para fechar.");
+                return false;
             }
-
-        } catch (NullPointerException e) {
-            System.err.println("ConexaoSQLite().desconectar()" + e.getMessage());
-
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
             return false;
-        }
-
-        System.out.println("Desconectado!");
-        return true;
-    }
-
-    //Cria um objeto Statement para consultas SQL
-    public Statement criarStatement() {
-        try {
-            return this.conexao.createStatement();
-        } catch (SQLException e) {
-            return null;
         }
     }
 
@@ -63,6 +51,8 @@ public class ConexaoSQLite {
         try {
             return this.conexao.prepareStatement(sql);
         } catch (SQLException e) {
+            System.err.println("Erro ao criar PreparedSTMT");
+            e.printStackTrace();
             return null;
         }
     }
