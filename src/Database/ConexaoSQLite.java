@@ -18,8 +18,19 @@ public class ConexaoSQLite {
             String url = "jdbc:sqlite:database/tarefas_db.db";
 
             this.conexao = DriverManager.getConnection(url);
-            System.out.println("Conexão estabelecida com sucesso!");
 
+            // Cria a tabela se não existir
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS tb_tarefas ("
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,"
+                    + "name TEXT (48) NOT NULL UNIQUE,"
+                    + "description TEXT (2048));";
+
+            try (Statement statement = conexao.createStatement()) {
+                statement.execute(createTableSQL);
+                System.out.println("Tabela criada ou verificada com sucesso!");
+            }
+
+            System.out.println("Conexão estabelecida com sucesso!");
             return true;
         } catch (SQLException e) {
             System.err.println("Erro ao estabelecer a conexão: " + e.getMessage());
