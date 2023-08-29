@@ -76,8 +76,8 @@ public final class TelaInicial extends javax.swing.JFrame {
         if (jTableTasks.getColumnModel().getColumnCount() > 0) {
             jTableTasks.getColumnModel().getColumn(0).setMinWidth(0);
             jTableTasks.getColumnModel().getColumn(0).setMaxWidth(0);
-            jTableTasks.getColumnModel().getColumn(1).setMinWidth(200);
-            jTableTasks.getColumnModel().getColumn(2).setMinWidth(600);
+            jTableTasks.getColumnModel().getColumn(1).setMinWidth(450);
+            jTableTasks.getColumnModel().getColumn(2).setMinWidth(350);
         }
 
         jLayeredPane2.setBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("Table.selectionBackground"), 3, true));

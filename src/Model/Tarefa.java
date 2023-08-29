@@ -47,15 +47,36 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public void validate() throws Exception {
-        if (this.nome.isEmpty() || this.nome == null) {
-            throw new Exception("Oops! Nome da tarefa em branco? Defina um nome para sua tarefa!");
+    public void validate() throws IllegalArgumentException {
+
+        // Valida se nome e descrição não são nulos ou vazios
+        if (this.nome == null || this.nome.isEmpty()) {
+            throw new IllegalArgumentException("Oops! Nome da tarefa em branco? Defina um nome para sua tarefa!");
         }
 
-        if (this.descricao.isEmpty() || this.descricao == null) {
-            throw new Exception("Eita, parece que alguém esqueceu a descrição. O campo descrição não pode estar vazio! ");
+        if (this.descricao == null || this.descricao.isEmpty()) {
+            throw new IllegalArgumentException("Eita, parece que alguém esqueceu a descrição. O campo descrição não pode estar vazio! ");
         }
 
+        // Pega a primeira letra de cada palavra e deixa em caixa alta
+        StringBuilder result = new StringBuilder();
+        boolean capitalizeNext = true;
+
+        for (char c : this.nome.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                capitalizeNext = true; // Próximo caractere será capitalizado
+                result.append(c);
+            } else if (capitalizeNext) {
+                result.append(Character.toUpperCase(c));
+                capitalizeNext = false;
+            } else {
+                result.append(Character.toLowerCase(c));
+            }
+        }
+
+        // Definindo a caixa alta para nome e descrição
+        this.nome = result.toString();
+        this.descricao = this.descricao.substring(0, 1).toUpperCase() + this.descricao.substring(1);
     }
 
     @Override
