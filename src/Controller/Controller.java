@@ -22,15 +22,20 @@ public class Controller {
     }
 
     // Create
-    public boolean criarTarefa(Tarefa task) {
-        boolean isCreated = db.addTask(task);
-        // Atualiza a Tabela
-        this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
-        return isCreated;
+    public boolean criarTarefa(Tarefa task) throws Exception {
+        try {
+            boolean isCreated = db.addTask(task);
+            // Atualiza a Tabela
+            this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
+            return isCreated;
+        } catch (Exception e) {
+            throw new Exception("Erro ao criar tarefa", e);
+        }
     }
 
     // Read
     String selectedFilter = " ";
+
     public ArrayList<Tarefa> listarTarefas(String filter) {
         ArrayList<Tarefa> tarefas = db.getAllTasks(filter);
         this.selectedFilter = filter;
@@ -38,11 +43,16 @@ public class Controller {
     }
 
     // Update
-    public boolean editarTarefa(Tarefa task) {
-        boolean isUpdated = db.updateTask(task);
-        // Atualiza a Tabela
-        this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
-        return isUpdated;
+    public boolean editarTarefa(Tarefa task) throws Exception {
+        try {
+            boolean isUpdated = db.updateTask(task);
+
+            // Atualiza a Tabela
+            this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
+            return isUpdated;
+        } catch (Exception e) {
+            throw new Exception("Erro ao editar tarefa", e);
+        }
     }
 
     // Delete
@@ -51,7 +61,7 @@ public class Controller {
         // Atualiza a Tabela
         this.telaInicialView.atualizarTabela(this.listarTarefas(selectedFilter));
     }
-    
+
     // Definir ID para -1
     public void minusId(Tarefa task) {
         task.setId(-1);
