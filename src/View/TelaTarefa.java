@@ -21,7 +21,8 @@ public class TelaTarefa extends javax.swing.JFrame {
     Tarefa task = null;
 
     Controller controller;
-    public TelaTarefa(Tarefa tarefa, Controller controllerTask ) {
+
+    public TelaTarefa(Tarefa tarefa, Controller controllerTask) {
         this.task = tarefa;
         this.controller = controllerTask;
         initComponents();
@@ -264,22 +265,20 @@ public class TelaTarefa extends javax.swing.JFrame {
             System.out.println("NPE - New or Edit Task" + e);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        } finally {
+            controller.minusId(task);
         }
     }//GEN-LAST:event_jbuttonSaveTaskActionPerformed
 
     private void jbuttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonCancelActionPerformed
-        try {
-            String text = """
+        String text = """
                           Deseja mesmo cancelar e voltar para tela inicial?
                           Todos os dados não salvos serão perdidos para sempre!""";
 
-            int option = JOptionPane.showConfirmDialog(null, text, "Confirmação", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, text, "Confirmação", JOptionPane.YES_NO_OPTION);
 
-            if (option == JOptionPane.YES_OPTION) {
-                this.dispose();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        if (option == JOptionPane.YES_OPTION) {
+            this.dispose();
         }
     }//GEN-LAST:event_jbuttonCancelActionPerformed
 

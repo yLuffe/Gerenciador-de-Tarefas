@@ -93,7 +93,7 @@
                   <Component id="jLayeredPane2" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="813" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -103,7 +103,7 @@
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLayeredPane2" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" pref="646" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
@@ -174,28 +174,13 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jUpdateTask" alignment="0" pref="192" max="32767" attributes="0"/>
-                                  <Component id="jCreateTask" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jDeleteTask" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jBtnFilter" min="-2" pref="26" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                      <Component id="jComboFilter" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jReloadButton" min="-2" pref="30" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboFilter" alignment="0" pref="191" max="32767" attributes="0"/>
+                          <Component id="jUpdateTask" alignment="0" pref="191" max="32767" attributes="0"/>
+                          <Component id="jCreateTask" alignment="0" pref="191" max="32767" attributes="0"/>
+                          <Component id="jDeleteTask" alignment="0" pref="191" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                   </Group>
@@ -211,16 +196,8 @@
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jBtnFilter" min="-2" pref="26" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jComboFilter" max="32767" attributes="0"/>
-                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="334" max="32767" attributes="0"/>
-                      <Component id="jReloadButton" min="-2" pref="30" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="jComboFilter" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="375" max="-2" attributes="0"/>
                       <Component id="jDeleteTask" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -282,18 +259,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jDeleteTaskActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jReloadButton">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="18" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&#x21bb;"/>
-                <Property name="toolTipText" type="java.lang.String" value="Recarregar Tabela"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jReloadButtonActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JComboBox" name="jComboFilter">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -318,17 +283,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Filtrar por:"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="jBtnFilter">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="64" green="64" red="64" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="\ud83d\udd0e" containsInvalidXMLChars="true"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnFilterActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

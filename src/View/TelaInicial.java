@@ -29,10 +29,8 @@ public final class TelaInicial extends javax.swing.JFrame {
         jCreateTask = new javax.swing.JButton();
         jUpdateTask = new javax.swing.JButton();
         jDeleteTask = new javax.swing.JButton();
-        jReloadButton = new javax.swing.JButton();
         jComboFilter = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jBtnFilter = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuOpcoes = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -41,11 +39,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Tarefas Pessoais");
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
+        
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -115,15 +109,6 @@ public final class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jReloadButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jReloadButton.setText("↻");
-        jReloadButton.setToolTipText("Recarregar Tabela");
-        jReloadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jReloadButtonActionPerformed(evt);
-            }
-        });
-
         jComboFilter.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primeira Criada", "Nome Crescente", "Nome Decrescente" }));
         jComboFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -135,44 +120,24 @@ public final class TelaInicial extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Filtrar por:");
 
-        jBtnFilter.setBackground(new java.awt.Color(100, 100, 100));
-        jBtnFilter.setText("🔎");
-        jBtnFilter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnFilterActionPerformed(evt);
-            }
-        });
-
         jLayeredPane2.setLayer(jCreateTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jUpdateTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jDeleteTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jReloadButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jComboFilter, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jBtnFilter, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
         jLayeredPane2Layout.setHorizontalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jUpdateTask, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                            .addComponent(jCreateTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDeleteTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addComponent(jBtnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jComboFilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jReloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1)
+                    .addComponent(jComboFilter, 0, 191, Short.MAX_VALUE)
+                    .addComponent(jUpdateTask, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(jCreateTask, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                    .addComponent(jDeleteTask, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                 .addGap(5, 5, 5))
         );
         jLayeredPane2Layout.setVerticalGroup(
@@ -185,14 +150,8 @@ public final class TelaInicial extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBtnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jComboFilter)
-                        .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
-                .addComponent(jReloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(jComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(375, 375, 375)
                 .addComponent(jDeleteTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -209,7 +168,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                 .addComponent(jLayeredPane2)
                 .addGap(5, 5, 5)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,18 +176,13 @@ public final class TelaInicial extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLayeredPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addGap(10, 10, 10))
         );
 
         jMenuOpcoes.setText("Opções");
 
         jMenuItem1.setText("Backup");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
         jMenuOpcoes.add(jMenuItem1);
 
         jMenuSair.setText("Sair");
@@ -336,9 +290,9 @@ public final class TelaInicial extends javax.swing.JFrame {
                 );
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Nenhuma linha selecionada ou índice inválido." + e);
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Erro jTableTasksMouseClicked" + e);
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jTableTasksMouseClicked
 
@@ -348,37 +302,15 @@ public final class TelaInicial extends javax.swing.JFrame {
             if (this.objectTask.getId() != -1) {// Abre a tela para edição da tarefa
                 TelaTarefa edit = new TelaTarefa(this.objectTask, this.controller);
                 edit.setVisible(true);
-                edit.setEditScreen(this.objectTask);
-
-                //minusId();
+                edit.setEditScreen(this.objectTask);            
             }
         } catch (Exception e) {
-            System.out.println("jUpdateTaskActionPerformed" + e);
-        } finally {
-
+            e.printStackTrace();
         }
-
     }//GEN-LAST:event_jUpdateTaskActionPerformed
 
-    private void jReloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReloadButtonActionPerformed
-        //atualizarTabela();    }//GEN-LAST:event_jReloadButtonActionPerformed
-    }
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        //atualizarTabela();
-    }//GEN-LAST:event_formWindowActivated
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jComboFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFilterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboFilterActionPerformed
-
-    private void jBtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFilterActionPerformed
-
-        atualizarTabela(controller.listarTarefas(jComboFilter.getSelectedItem().toString()));
-    }//GEN-LAST:event_jBtnFilterActionPerformed
+        atualizarTabela(controller.listarTarefas(jComboFilter.getSelectedItem().toString()));    }//GEN-LAST:event_jComboFilterActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -389,7 +321,6 @@ public final class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnFilter;
     private javax.swing.JComboBox<String> jComboFilter;
     private javax.swing.JButton jCreateTask;
     private javax.swing.JButton jDeleteTask;
@@ -400,7 +331,6 @@ public final class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuOpcoes;
     private javax.swing.JMenuItem jMenuSair;
-    private javax.swing.JButton jReloadButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTasks;
     private javax.swing.JButton jUpdateTask;
