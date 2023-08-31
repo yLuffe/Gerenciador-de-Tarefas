@@ -376,7 +376,7 @@ public final class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jComboFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFilterActionPerformed
-        controller.listarTarefas(jComboFilter.getSelectedItem().toString());
+        atualizarTabela(controller.listarTarefas(jComboFilter.getSelectedItem().toString())); 
         System.out.println(jComboFilter.getSelectedItem().toString());
     }//GEN-LAST:event_jComboFilterActionPerformed
 

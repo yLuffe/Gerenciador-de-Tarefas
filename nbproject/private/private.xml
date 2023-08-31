@@ -6,7 +6,8 @@
             <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/Database/ConexaoSQLite.java</file>
             <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/View/TelaInicial.java</file>
             <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/Main/Main.java</file>
-            <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/View/util/LimitChars.java</file>
+            <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/View/TelaTarefa.java</file>
+            <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/View/util/Colors.java</file>
             <file>file:/E:/Programação/GitHub/Gerenciador-de-Tarefas/src/Model/TarefaDAO.java</file>
         </group>
     </open-files>
