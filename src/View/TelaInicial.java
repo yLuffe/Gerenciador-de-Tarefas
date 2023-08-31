@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controller.Controller;
+import javax.swing.*;
+import java.awt.*;
+import View.util.Colors;
 
 public final class TelaInicial extends javax.swing.JFrame {
 
@@ -13,30 +16,38 @@ public final class TelaInicial extends javax.swing.JFrame {
 
     Controller controller;
 
+    private JPanel lastSelectedPanel = null;
+
     public TelaInicial() {
         initComponents();
         this.controller = new Controller(this);
     }
+    //jTextName.setBorder(new RoundedBorder(10));
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTasks = new javax.swing.JTable();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
-        jCreateTask = new javax.swing.JButton();
-        jUpdateTask = new javax.swing.JButton();
-        jDeleteTask = new javax.swing.JButton();
-        jReloadButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jNewTaskPanel = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jEditPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jDeletePanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jComboFilter = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jBtnFilter = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuOpcoes = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuSair = new javax.swing.JMenuItem();
+        jLabel10 = new javax.swing.JLabel();
+        jTextName = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Tarefas Pessoais");
@@ -46,8 +57,6 @@ public final class TelaInicial extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
-
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jTableTasks.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTableTasks.setModel(new javax.swing.table.DefaultTableModel(
@@ -80,184 +89,250 @@ public final class TelaInicial extends javax.swing.JFrame {
             jTableTasks.getColumnModel().getColumn(2).setMinWidth(350);
         }
 
-        jLayeredPane2.setBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("Table.selectionBackground"), 3, true));
+        jPanel1.setBackground(new java.awt.Color(46, 32, 76));
 
-        jCreateTask.setBackground(new java.awt.Color(200, 240, 200));
-        jCreateTask.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jCreateTask.setForeground(new java.awt.Color(100, 150, 100));
-        jCreateTask.setText("Nova Tarefa");
-        jCreateTask.setToolTipText("Criar Nova Tarefa");
-        jCreateTask.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCreateTaskActionPerformed(evt);
+        jNewTaskPanel.setBackground(new java.awt.Color(65, 48, 102));
+        jNewTaskPanel.setToolTipText("Criar Tarefa");
+        jNewTaskPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jNewTaskPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jNewTaskPanelMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jNewTaskPanelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jNewTaskPanelMouseReleased(evt);
             }
         });
 
-        jUpdateTask.setBackground(new java.awt.Color(200, 220, 240));
-        jUpdateTask.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jUpdateTask.setForeground(new java.awt.Color(80, 100, 120));
-        jUpdateTask.setText("Editar Tarefa");
-        jUpdateTask.setToolTipText("Editar Tarefa");
-        jUpdateTask.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jUpdateTaskActionPerformed(evt);
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel4.setText("Nova Tarefa");
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/PlusIcon.png"))); // NOI18N
+
+        javax.swing.GroupLayout jNewTaskPanelLayout = new javax.swing.GroupLayout(jNewTaskPanel);
+        jNewTaskPanel.setLayout(jNewTaskPanelLayout);
+        jNewTaskPanelLayout.setHorizontalGroup(
+            jNewTaskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jNewTaskPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel4)
+                .addGap(60, 60, 60))
+        );
+        jNewTaskPanelLayout.setVerticalGroup(
+            jNewTaskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jNewTaskPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jNewTaskPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
+        );
+
+        jEditPanel.setBackground(new java.awt.Color(65, 48, 102));
+        jEditPanel.setToolTipText("Editar Tarefa");
+        jEditPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jEditPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jEditPanelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jEditPanelMouseReleased(evt);
             }
         });
 
-        jDeleteTask.setBackground(new java.awt.Color(255, 200, 200));
-        jDeleteTask.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jDeleteTask.setForeground(new java.awt.Color(255, 100, 100));
-        jDeleteTask.setText("Apagar");
-        jDeleteTask.setToolTipText("Deletar Tarefa");
-        jDeleteTask.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDeleteTaskActionPerformed(evt);
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel5.setText("Editar Tarefa");
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/EditIcon.png"))); // NOI18N
+
+        javax.swing.GroupLayout jEditPanelLayout = new javax.swing.GroupLayout(jEditPanel);
+        jEditPanel.setLayout(jEditPanelLayout);
+        jEditPanelLayout.setHorizontalGroup(
+            jEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jEditPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel5)
+                .addGap(60, 60, 60))
+        );
+        jEditPanelLayout.setVerticalGroup(
+            jEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jEditPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jEditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
+        );
+
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("JetBrains Mono Medium", 1, 24)); // NOI18N
+        jLabel2.setText("Gerenciador de");
+
+        jLabel3.setFont(new java.awt.Font("JetBrains Mono Medium", 1, 24)); // NOI18N
+        jLabel3.setText("Tarefas");
+
+        jDeletePanel.setBackground(new java.awt.Color(65, 48, 102));
+        jDeletePanel.setToolTipText("Deletar Tarefa");
+        jDeletePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jDeletePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jDeletePanelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jDeletePanelMouseReleased(evt);
             }
         });
 
-        jReloadButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jReloadButton.setText("↻");
-        jReloadButton.setToolTipText("Recarregar Tabela");
-        jReloadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jReloadButtonActionPerformed(evt);
-            }
-        });
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel6.setText("Deletar");
 
-        jComboFilter.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/images/TrashIcon.png"))); // NOI18N
+
+        javax.swing.GroupLayout jDeletePanelLayout = new javax.swing.GroupLayout(jDeletePanel);
+        jDeletePanel.setLayout(jDeletePanelLayout);
+        jDeletePanelLayout.setHorizontalGroup(
+            jDeletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDeletePanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel6)
+                .addGap(60, 60, 60))
+        );
+        jDeletePanelLayout.setVerticalGroup(
+            jDeletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDeletePanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jDeletePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jEditPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addGap(30, 30, 30))
+            .addComponent(jDeletePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jNewTaskPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jLabel2)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jNewTaskPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jEditPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jDeletePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(298, 298, 298))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(65, 48, 102));
+
+        jComboFilter.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jComboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primeira Criada", "Nome Crescente", "Nome Decrescente" }));
+        jComboFilter.setToolTipText("Selecione um Filtro");
+        jComboFilter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboFilterActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Filtrar por:");
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel10.setText("Nome:");
 
-        jBtnFilter.setBackground(new java.awt.Color(100, 100, 100));
-        jBtnFilter.setText("🔎");
-        jBtnFilter.addActionListener(new java.awt.event.ActionListener() {
+        jTextName.setBackground(new java.awt.Color(40, 42, 54));
+        jTextName.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextName.setToolTipText("Busca por Nome");
+        jTextName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnFilterActionPerformed(evt);
+                jTextNameActionPerformed(evt);
             }
         });
 
-        jLayeredPane2.setLayer(jCreateTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jUpdateTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jDeleteTask, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jReloadButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jComboFilter, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jBtnFilter, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jButton1.setBackground(new java.awt.Color(40, 42, 54));
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("🔎");
+        jButton1.setToolTipText("Buscar");
 
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jUpdateTask, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                            .addComponent(jCreateTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDeleteTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addComponent(jBtnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jComboFilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jReloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5))
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jCreateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jUpdateTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel10)
+                .addGap(10, 10, 10)
+                .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBtnFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jComboFilter)
-                        .addGap(1, 1, 1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
-                .addComponent(jReloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jDeleteTask, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
-
-        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLayeredPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLayeredPane2)
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLayeredPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
-
-        jMenuOpcoes.setText("Opções");
-
-        jMenuItem1.setText("Backup");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenuOpcoes.add(jMenuItem1);
-
-        jMenuSair.setText("Sair");
-        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSairActionPerformed(evt);
-            }
-        });
-        jMenuOpcoes.add(jMenuSair);
-
-        jMenuBar1.add(jMenuOpcoes);
-
-        setJMenuBar(jMenuBar1);
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLayeredPane1)
-                .addGap(5, 5, 5))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, 0))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLayeredPane1)
-                .addGap(5, 5, 5))
+                .addGap(78, 78, 78)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -282,18 +357,72 @@ public final class TelaInicial extends javax.swing.JFrame {
         }
     }
 
-    // Método para fechar o sistema
-    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuSairActionPerformed
+    // Método pegar ID tarefa Seleciona em jTableTasks
+    private void jTableTasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTasksMouseClicked
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
+            int selectedRow = jTableTasks.getSelectedRow();
 
-    // Método abrir TelaTarefa
-    private void jCreateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateTaskActionPerformed
+            if (selectedRow >= 0) { // Verifica se alguma linha foi selecionada
+                this.objectTask = new Tarefa(
+                        (int) model.getValueAt(selectedRow, 0),
+                        (String) model.getValueAt(selectedRow, 1),
+                        (String) model.getValueAt(selectedRow, 2)
+                );
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Nenhuma linha selecionada ou índice inválido." + e);
+        } catch (Exception e) {
+            System.out.println("Erro jTableTasksMouseClicked" + e);
+        }
+    }//GEN-LAST:event_jTableTasksMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        //atualizarTabela();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jComboFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFilterActionPerformed
+        controller.listarTarefas(jComboFilter.getSelectedItem().toString());
+        System.out.println(jComboFilter.getSelectedItem().toString());
+    }//GEN-LAST:event_jComboFilterActionPerformed
+
+    private void jNewTaskPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jNewTaskPanelMousePressed
+        changeColor(jNewTaskPanel, Colors.PURPLE_SEL);
+
+    }//GEN-LAST:event_jNewTaskPanelMousePressed
+
+    private void jNewTaskPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jNewTaskPanelMouseReleased
+        changeColor(jNewTaskPanel, Colors.PURPLE_BG);
         new TelaTarefa(new Tarefa(), this.controller).setVisible(true);
-    }//GEN-LAST:event_jCreateTaskActionPerformed
+    }//GEN-LAST:event_jNewTaskPanelMouseReleased
 
-    // Método Deletar Tarefa
-    private void jDeleteTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteTaskActionPerformed
+    private void jEditPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jEditPanelMousePressed
+        changeColor(jEditPanel, Colors.PURPLE_SEL);
+    }//GEN-LAST:event_jEditPanelMousePressed
+
+    private void jEditPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jEditPanelMouseReleased
+        changeColor(jEditPanel, Colors.PURPLE_BG);
+        try {
+            if (this.objectTask.getId() != -1) {// Abre a tela para edição da tarefa
+                TelaTarefa edit = new TelaTarefa(this.objectTask, this.controller);
+                edit.setVisible(true);
+                edit.setEditScreen(this.objectTask);
+
+                //minusId();
+            }
+        } catch (Exception e) {
+            System.out.println("jUpdateTaskActionPerformed" + e);
+        } finally {
+
+        }
+    }//GEN-LAST:event_jEditPanelMouseReleased
+
+    private void jDeletePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDeletePanelMousePressed
+        changeColor(jDeletePanel, Colors.PURPLE_SEL);
+    }//GEN-LAST:event_jDeletePanelMousePressed
+
+    private void jDeletePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDeletePanelMouseReleased
+        changeColor(jDeletePanel, Colors.PURPLE_BG);
         try {
             // Mensagem confirmação
             String text = "Esta ação irá remover permanentemente a tarefa:\n"
@@ -320,89 +449,41 @@ public final class TelaInicial extends javax.swing.JFrame {
         } finally {
             controller.minusId(objectTask);
         }
-    }//GEN-LAST:event_jDeleteTaskActionPerformed
+    }//GEN-LAST:event_jDeletePanelMouseReleased
 
-    // Método pegar ID tarefa Seleciona em jTableTasks
-    private void jTableTasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTasksMouseClicked
-        try {
-            DefaultTableModel model = (DefaultTableModel) jTableTasks.getModel();
-            int selectedRow = jTableTasks.getSelectedRow();
+    private void jNewTaskPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jNewTaskPanelMouseClicked
 
-            if (selectedRow >= 0) { // Verifica se alguma linha foi selecionada
-                this.objectTask = new Tarefa(
-                        (int) model.getValueAt(selectedRow, 0),
-                        (String) model.getValueAt(selectedRow, 1),
-                        (String) model.getValueAt(selectedRow, 2)
-                );
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Nenhuma linha selecionada ou índice inválido." + e);
-        } catch (Exception e) {
-            System.out.println("Erro jTableTasksMouseClicked" + e);
-        }
-    }//GEN-LAST:event_jTableTasksMouseClicked
+    }//GEN-LAST:event_jNewTaskPanelMouseClicked
 
-    // Método edição tarefa
-    private void jUpdateTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateTaskActionPerformed
-        try {
-            if (this.objectTask.getId() != -1) {// Abre a tela para edição da tarefa
-                TelaTarefa edit = new TelaTarefa(this.objectTask, this.controller);
-                edit.setVisible(true);
-                edit.setEditScreen(this.objectTask);
-
-                //minusId();
-            }
-        } catch (Exception e) {
-            System.out.println("jUpdateTaskActionPerformed" + e);
-        } finally {
-
-        }
-
-    }//GEN-LAST:event_jUpdateTaskActionPerformed
-
-    private void jReloadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReloadButtonActionPerformed
-        //atualizarTabela();    }//GEN-LAST:event_jReloadButtonActionPerformed
-    }
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        //atualizarTabela();
-    }//GEN-LAST:event_formWindowActivated
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jComboFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFilterActionPerformed
+    private void jTextNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboFilterActionPerformed
+    }//GEN-LAST:event_jTextNameActionPerformed
 
-    private void jBtnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFilterActionPerformed
+    public void changeColor(JPanel panel, Color color) {
+        panel.setBackground(color);
 
-        atualizarTabela(controller.listarTarefas(jComboFilter.getSelectedItem().toString()));
-    }//GEN-LAST:event_jBtnFilterActionPerformed
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaInicial().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnFilter;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboFilter;
-    private javax.swing.JButton jCreateTask;
-    private javax.swing.JButton jDeleteTask;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenu jMenuOpcoes;
-    private javax.swing.JMenuItem jMenuSair;
-    private javax.swing.JButton jReloadButton;
+    private javax.swing.JPanel jDeletePanel;
+    private javax.swing.JPanel jEditPanel;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jNewTaskPanel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableTasks;
-    private javax.swing.JButton jUpdateTask;
+    private javax.swing.JTextField jTextName;
     // End of variables declaration//GEN-END:variables
 }
