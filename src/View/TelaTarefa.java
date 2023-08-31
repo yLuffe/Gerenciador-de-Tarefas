@@ -84,15 +84,15 @@ public class TelaTarefa extends javax.swing.JFrame {
         setTitle("Criar Tarefa");
         setResizable(false);
 
-        jLayeredPane2.setBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("Table.selectionBackground"), 3, true));
+        jLayeredPane2.setBackground(new java.awt.Color(255, 121, 197));
+        jLayeredPane2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(65, 48, 102), 3, true));
 
         jTitulo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jTitulo.setForeground(new java.awt.Color(255, 100, 100));
         jTitulo.setText("Nova Tarefa");
 
-        jbuttonSaveTask.setBackground(new java.awt.Color(200, 240, 200));
+        jbuttonSaveTask.setBackground(new java.awt.Color(65, 48, 102));
         jbuttonSaveTask.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jbuttonSaveTask.setForeground(new java.awt.Color(100, 150, 100));
+        jbuttonSaveTask.setForeground(new java.awt.Color(240, 240, 240));
         jbuttonSaveTask.setText("✔");
         jbuttonSaveTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,9 +100,9 @@ public class TelaTarefa extends javax.swing.JFrame {
             }
         });
 
-        jbuttonCancel.setBackground(new java.awt.Color(255, 200, 200));
+        jbuttonCancel.setBackground(new java.awt.Color(65, 48, 102));
         jbuttonCancel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jbuttonCancel.setForeground(new java.awt.Color(255, 100, 100));
+        jbuttonCancel.setForeground(new java.awt.Color(240, 240, 240));
         jbuttonCancel.setText("✖");
         jbuttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +138,7 @@ public class TelaTarefa extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLayeredPane3.setBorder(new javax.swing.border.LineBorder(javax.swing.UIManager.getDefaults().getColor("Table.selectionBackground"), 3, true));
+        jLayeredPane3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(65, 48, 102), 3, true));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Nome:");
