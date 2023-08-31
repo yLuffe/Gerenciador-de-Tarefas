@@ -52,11 +52,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Tarefas Pessoais");
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
+        
 
         jTableTasks.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTableTasks.setModel(new javax.swing.table.DefaultTableModel(
@@ -131,7 +127,6 @@ public final class TelaInicial extends javax.swing.JFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
-
         jEditPanel.setBackground(new java.awt.Color(65, 48, 102));
         jEditPanel.setToolTipText("Editar Tarefa");
         jEditPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -172,7 +167,6 @@ public final class TelaInicial extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("JetBrains Mono Medium", 1, 24)); // NOI18N
         jLabel2.setText("Gerenciador de");
 
@@ -371,9 +365,9 @@ public final class TelaInicial extends javax.swing.JFrame {
                 );
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Nenhuma linha selecionada ou índice inválido." + e);
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Erro jTableTasksMouseClicked" + e);
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jTableTasksMouseClicked
 
@@ -406,14 +400,10 @@ public final class TelaInicial extends javax.swing.JFrame {
             if (this.objectTask.getId() != -1) {// Abre a tela para edição da tarefa
                 TelaTarefa edit = new TelaTarefa(this.objectTask, this.controller);
                 edit.setVisible(true);
-                edit.setEditScreen(this.objectTask);
-
-                //minusId();
+                edit.setEditScreen(this.objectTask);            
             }
         } catch (Exception e) {
-            System.out.println("jUpdateTaskActionPerformed" + e);
-        } finally {
-
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jEditPanelMouseReleased
 
@@ -461,7 +451,6 @@ public final class TelaInicial extends javax.swing.JFrame {
 
     public void changeColor(JPanel panel, Color color) {
         panel.setBackground(color);
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
