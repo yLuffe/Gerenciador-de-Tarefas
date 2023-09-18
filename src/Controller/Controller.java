@@ -4,6 +4,9 @@ import Model.Tarefa;
 import Model.TarefaDAO;
 import java.util.ArrayList;
 import View.TelaInicial;
+import java.util.Collections;
+import java.util.Comparator;
+import javax.swing.JOptionPane;
 
 public class Controller {
 
@@ -34,12 +37,40 @@ public class Controller {
     }
 
     // Read
-    String selectedFilter = " ";
+    String selectedFilter = "";
 
     public ArrayList<Tarefa> listarTarefas(String filter) {
-        ArrayList<Tarefa> tarefas = db.getAllTasks(filter);
-        this.selectedFilter = filter;
-        return tarefas;
+        try {
+            ArrayList<Tarefa> tarefas = db.getAllTasks();
+            ArrayList<Tarefa> tarefasFiltradas = new ArrayList<>();
+            switch (filter.toLowerCase().trim()) {
+                case "nome crescente" ->
+                    Collections.sort(tarefas, Comparator.comparing(Tarefa::getNome));
+                case "nome decrescente" ->
+                    Collections.sort(tarefas, Comparator.comparing(Tarefa::getNome).reversed());
+                case "primeira criada" ->
+                    Collections.sort(tarefas, Comparator.comparing(Tarefa::getId));
+                case "última criada" ->
+                    Collections.sort(tarefas, Comparator.comparing(Tarefa::getId).reversed());
+                default -> {
+                    for (Tarefa tarefa : tarefas) {
+                        if (tarefa.getNome().toLowerCase().contains(filter)) {
+                            tarefasFiltradas.add(tarefa);
+                        } else {
+                            throw new Exception("Não foram encontradas tarefas com esse nome");
+                        }
+                    }
+                    return tarefasFiltradas;
+                }
+            }
+
+            this.selectedFilter = filter;
+            return tarefas;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return listarTarefas("primeira criada");
+
     }
 
     // Update

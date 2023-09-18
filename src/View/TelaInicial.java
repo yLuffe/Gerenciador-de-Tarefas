@@ -47,7 +47,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         jComboFilter = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jTextName = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jSearchBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Tarefas Pessoais");
@@ -253,7 +253,7 @@ public final class TelaInicial extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(65, 48, 102));
 
         jComboFilter.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jComboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primeira Criada", "Nome Crescente", "Nome Decrescente" }));
+        jComboFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primeira Criada","Última Criada", "Nome Crescente", "Nome Decrescente" }));
         jComboFilter.setToolTipText("Selecione um Filtro");
         jComboFilter.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jComboFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -274,14 +274,14 @@ public final class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(40, 42, 54));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("🔎");
-        jButton1.setToolTipText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jSearchBtn.setBackground(new java.awt.Color(40, 42, 54));
+        jSearchBtn.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jSearchBtn.setForeground(new java.awt.Color(255, 255, 255));
+        jSearchBtn.setText("🔎");
+        jSearchBtn.setToolTipText("Buscar");
+        jSearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jSearchBtnActionPerformed(evt);
             }
         });
 
@@ -295,7 +295,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -307,7 +307,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel10)
                     .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
@@ -457,10 +457,11 @@ public final class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchBtnActionPerformed
         atualizarTabela(controller.listarTarefas(jTextName.getText().trim()));
+        jTextName.setText("");
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jSearchBtnActionPerformed
 
     public void changeColor(JPanel panel, Color color) {
         panel.setBackground(color);
@@ -468,7 +469,6 @@ public final class TelaInicial extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboFilter;
     private javax.swing.JPanel jDeletePanel;
     private javax.swing.JPanel jEditPanel;
@@ -485,6 +485,7 @@ public final class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jSearchBtn;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableTasks;
     private javax.swing.JTextField jTextName;
