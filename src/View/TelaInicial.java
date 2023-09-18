@@ -52,7 +52,11 @@ public final class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciador de Tarefas Pessoais");
         setResizable(false);
-        
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jTableTasks.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTableTasks.setModel(new javax.swing.table.DefaultTableModel(
@@ -127,6 +131,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
+
         jEditPanel.setBackground(new java.awt.Color(65, 48, 102));
         jEditPanel.setToolTipText("Editar Tarefa");
         jEditPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -167,6 +172,7 @@ public final class TelaInicial extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
         jLabel2.setFont(new java.awt.Font("JetBrains Mono Medium", 1, 24)); // NOI18N
         jLabel2.setText("Gerenciador de");
 
@@ -273,6 +279,11 @@ public final class TelaInicial extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("🔎");
         jButton1.setToolTipText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -313,10 +324,7 @@ public final class TelaInicial extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +384,7 @@ public final class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jComboFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboFilterActionPerformed
-        atualizarTabela(controller.listarTarefas(jComboFilter.getSelectedItem().toString())); 
+        atualizarTabela(controller.listarTarefas(jComboFilter.getSelectedItem().toString()));
         System.out.println(jComboFilter.getSelectedItem().toString());
     }//GEN-LAST:event_jComboFilterActionPerformed
 
@@ -400,7 +408,7 @@ public final class TelaInicial extends javax.swing.JFrame {
             if (this.objectTask.getId() != -1) {// Abre a tela para edição da tarefa
                 TelaTarefa edit = new TelaTarefa(this.objectTask, this.controller);
                 edit.setVisible(true);
-                edit.setEditScreen(this.objectTask);            
+                edit.setEditScreen(this.objectTask);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -449,9 +457,15 @@ public final class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNameActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        atualizarTabela(controller.listarTarefas(jTextName.getText().trim()));
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void changeColor(JPanel panel, Color color) {
         panel.setBackground(color);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

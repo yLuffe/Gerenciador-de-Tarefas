@@ -12,7 +12,7 @@ public class Main {
         // Altera o nome dos botões de YES e NO do JOP para SIM e NÃO
         UIManager.put("OptionPane.yesButtonText", "Sim");
         UIManager.put("OptionPane.noButtonText", "Não");
-
+  
         // Ativa o tema Dracula
         FlatDraculaIJTheme.setup();
 

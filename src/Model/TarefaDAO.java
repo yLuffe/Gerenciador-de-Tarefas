@@ -82,8 +82,10 @@ public class TarefaDAO {
                 "SELECT * FROM tb_tarefas ORDER BY name";
             case "Nome Decrescente" ->
                 "SELECT * FROM tb_tarefas ORDER BY name DESC";
-            default ->
+            case "Primeira Criada" ->
                 "SELECT * FROM tb_tarefas";
+            default ->
+                "SELECT * FROM tb_tarefas WHERE name LIKE '%" + filter + "%'";
         };
 
         try (PreparedStatement stmt = conexaoSQLite.criarPreparedStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
